@@ -58,19 +58,6 @@
     
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2022/01/26/hello-world/"/>
-      <url>/2022/01/26/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>drools-7入门</title>
       <link href="/2022/01/26/drools-7/"/>
       <url>/2022/01/26/drools-7/</url>
@@ -88,6 +75,33 @@
         <tags>
             
             <tag> Drools </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>中台的总结</title>
+      <link href="/2022/01/26/zhong-tai-de-zong-jie/"/>
+      <url>/2022/01/26/zhong-tai-de-zong-jie/</url>
+      
+        <content type="html"><![CDATA[<h2 id="中台价值"><a href="#中台价值" class="headerlink" title="中台价值"></a>中台价值</h2><p>中台是一种组织心智，也是一种经营理念，提供公司的组织效率、协同效率、运营效率</p><h2 id="中台总结"><a href="#中台总结" class="headerlink" title="中台总结"></a>中台总结</h2><ol><li>中台并不总是能够提炼共性需求<br> 1.1 中台和业务方天然存在共性需求的不同诉求，比如一个新的需求，中台开始会认为不是共性需求，因为是新提出来的，而业务方认为这个可以提炼成一些共性需求，一个新需求很难判断为是否是共性需求。如果先按特性需求，可能会先开发，然后其他业务方提出来后又提炼成共性需求。</li><li>中台抱大业务的大腿，小业务抱大业务大腿<br> 2.1 业务会分优先级，中台优先满足大业务<br> 2.2 中台的KPI只能通过大业务实现<br> 2.3 小业务之痛，“你这个需求不通用，不满足共性”</li><li>中台的轮子也会变化，业务被动升级<br> 3.1  中台系统的架构和接口需要不断演进。如果<br> 3.2  先特性再共性，老业务已有功能需要切换<br> 3.3 业务被动升级，升级频率比自己独立发展要高</li><li>中台是某类业务的中台，不是所有业务的中台<br> 4.1 业务相似才有共性需求，业务差异越大中台价值越小</li><li>要把架构、接口、模型统一</li></ol><h2 id="中台、平台区别"><a href="#中台、平台区别" class="headerlink" title="中台、平台区别"></a>中台、平台区别</h2><p>平台是和业务无关的<br>中台将业务里面共性抽取出来，形成业务的服务</p><h2 id="中台、微服务区别"><a href="#中台、微服务区别" class="headerlink" title="中台、微服务区别"></a>中台、微服务区别</h2><p>中台可以通过微服务去实现，微服务可以通过架构去实现，中台是一种组织上的概念</p><h2 id="中台建议"><a href="#中台建议" class="headerlink" title="中台建议"></a>中台建议</h2><ol><li>先做好<code>技术平台</code></li><li>中台不是银弹。至少有超过3个相似平行的业务线才考虑中台</li><li>不要一开始就做一个大而全的平台，先找一个子域试点；不要试图做一个满足所有业务线的中台</li><li>中台的领导要和业务线同级别的高层，不然要成为业务线的外包团队</li><li>做好中台的资源投入统计和分析，这个很验评估</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 中台 </tag>
             
         </tags>
       
