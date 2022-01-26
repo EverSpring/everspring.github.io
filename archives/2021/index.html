@@ -4,12 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis使用规范, EverSpring Blog">
-    <meta name="description" content="根据日常在使用redis时形成的，欢迎大家补充
-Redis使用规范一、key、value规范
-【强制】必须以业务名(或数据库名)为前缀，用冒号:分隔，比如 业务名:表名:id
-【强制】key设计必须简洁
-保证语义的前提下，控制key的长度，">
+    <meta name="keywords" content="归档: 2021, EverSpring Blog">
+    <meta name="description" content="EverSpring Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +17,7 @@ Redis使用规范一、key、value规范
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis使用规范 | EverSpring Blog</title>
+    <title>归档: 2021 | EverSpring Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,503 +305,218 @@ Redis使用规范一、key、value规范
 
 </header>
 
-    
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                只争朝夕，不负韶华
+                
+            </div>
 
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Redis使用规范</h1>
-                </div>
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: [ 
+                            
+                                "从来没有真正的绝境, 只有心灵的迷途",
+                            
+                                "Never really desperate, only the lost of the soul",
+                            
+                        ],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-<main class="container content">
-
-    
-    <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E8%A7%84%E8%8C%83/">
-                                <span class="chip bg-color">规范</span>
-                            </a>
-                        
-                            <a href="/tags/Redis/">
-                                <span class="chip bg-color">Redis</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-01-07
-                </div>
-                
-
-                
-
-                
-
-                
-
-                
-            </div>
-        </div>
-        <hr class="clearfix">
-
-        
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.css">
-        
-
-        
-
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <p>根据日常在使用redis时形成的，欢迎大家补充</p>
-<h1 id="Redis使用规范"><a href="#Redis使用规范" class="headerlink" title="Redis使用规范"></a>Redis使用规范</h1><h4 id="一、key、value规范"><a href="#一、key、value规范" class="headerlink" title="一、key、value规范"></a>一、key、value规范</h4><ol>
-<li>【强制】必须以业务名(或数据库名)为前缀，用冒号:分隔，比如 业务名:表名:id</li>
-<li>【强制】key设计必须简洁<ul>
-<li>保证语义的前提下，控制key的长度，当key较多时，内存占用也不容忽视。</li>
-<li>不要包含特殊字符：空格、换行、单双引号以及其他转义字符</li>
-</ul>
-</li>
-<li>【强制】string类型控制在10KB以内<br>说明：防止网卡流量、慢查询</li>
-<li>【推荐】hash、list、set、zset元素个数不要超过1万。如果数量过大，可以分成多个key</li>
-<li>【推荐】不要使用del删除非字符串的bigkey, 使用hscan、sscan、zscan方式渐进式删除<br>说明：因为时间复杂度是 O(N), hscan、sscan、zscan方式渐进式删除<ul>
-<li>如果是Hash类型的大Key，推荐使用hscan + hdel</li>
-<li>如果是List类型的大Key，推荐使用ltrim</li>
-<li>如果是Set类型的大Key，推荐使用sscan + srem</li>
-<li>如果是SortedSet类型的大Key，推荐使用zscan + zrem</li>
-</ul>
-</li>
-<li>【推荐】尽量设置过期时间<br>说明：条件允许可以打散过期时间，防止集中过期，不过期的数据重点关注idletime。遇到大bigkey 过期，会触发del，造成主线程阻塞</li>
-</ol>
-<h4 id="二、命令规范"><a href="#二、命令规范" class="headerlink" title="二、命令规范"></a>二、命令规范</h4><ol>
-<li>【强制】禁用keys<br>说明：Keys 命令效率极低，属于 O(N)操作，会阻塞其他正常命令，在 cluster 上，会是灾难性的操作</li>
-<li>【强制】禁用flushall、flushdb<br>说明：命令会清空所有数据，属于高危操作</li>
-<li>【强制】严禁对 zset 的不设范围操作</li>
-<li>【强制】ZRANGE、 ZRANGEBYSCORE等多个操作 ZSET 的函数，严禁使用 ZRANGE myzset 0 -1 等这种不设置范围的操作。如要使用请指定范围，如 ZRANGE myzset 0 100。如不确定长度，可使用 ZCARD 判断长度</li>
-<li>【强制】严禁对大数据量 Key 使用 HGETALL</li>
-<li>【推荐】谨慎使用 sunion, sinter, sdiff等一些聚合操作，如果要用，需要提前报备</li>
-</ol>
-<h4 id="三、其他使用要求"><a href="#三、其他使用要求" class="headerlink" title="三、其他使用要求"></a>三、其他使用要求</h4><ol>
-<li>【推荐】必要情况下可以使用monitor命令，但在生产上要注意不要长时间使用</li>
-<li>【推荐】redis实例默认支持16个数据库，可以把不同的业务分到不同的库。但尽量不是切换库(即select库)，如果需要跨库的通过key名来处理</li>
-<li>【推荐】 如果有批量操作，优先使用mget、mset或pipeline，提高效率，但要注意控制一次批量操作的元素个数</li>
-<li>【强制】不要在lua脚本中使用比较耗时的代码，比如长时间的sleep、大循环等， lua脚本的执行超时时间为5秒钟</li>
-<li>【推荐】只用来保存热数据，不准当作落地数据库使用，即redis中的数据需要在其他数据库中查询到</li>
-</ol>
-<h4 id="四、集群使用"><a href="#四、集群使用" class="headerlink" title="四、集群使用"></a>四、集群使用</h4><p>Redis集群版本在使用Lua上有特殊要求</p>
-<ol>
-<li>【强制】所有key都应该由 KEYS 数组来传递，redis.call/pcall 里面调用的redis命令，key的位置，必须是KEYS array, 否则直接返回error，”-ERR bad lua script for redis cluster, all the keys that the script uses should be passed using the KEYS array”</li>
-<li>【强制】所有key，必须在1个slot上，否则直接返回error, “-ERR eval/evalsha command keys must in same slot”<br>说明：redis在使用hash算法将键映射到slot时，只会计算{}里面的内容，若{}内的内容相同，则将键映射到同一个slot</li>
-</ol>
-<h4 id="五、代码使用"><a href="#五、代码使用" class="headerlink" title="五、代码使用"></a>五、代码使用</h4><ol>
-<li>【推荐】value为string时，序列化尽量少采用JDK自带的序列化方式（JdkSerializationRedisSerializer），因为序列化速度慢</li>
-<li>【强制】目前已经提供puzzle-cache公共组件，开发过程中尽量使用此组件，统一序列化方式</li>
-<li>【强制】同一工程中，由统一的类保管key，不准在业务类中私自定义key</li>
-</ol>
-
-                
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">EverSpring</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://everspring.github.io/2022/01/07/redis-shi-yong-gui-fan/">https://everspring.github.io/2022/01/07/redis-shi-yong-gui-fan/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="/about" target="_blank">EverSpring</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/%E8%A7%84%E8%8C%83/">
-                                    <span class="chip bg-color">规范</span>
-                                </a>
-                            
-                                <a href="/tags/Redis/">
-                                    <span class="chip bg-color">Redis</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-    $(function () {
-        $('.tabs').tabs();
-    });
+    // 每天切换 banner 图.  Switch banner image every day.
+    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
 </script>
 
-            
-        </div>
+
     </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2022/01/17/mysql-shu-ju-ku-shi-yong-gui-fan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="MySQL数据库使用规范">
-                        
-                        <span class="card-title">MySQL数据库使用规范</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">规范</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/05/26/zhong-tai-de-zong-jie/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="中台的总结">
-                        
-                        <span class="card-title">中台的总结</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
-                                    架构
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E4%B8%AD%E5%8F%B0/">
-                        <span class="chip bg-color">中台</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
 </div>
 
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
+<main class="content">
 
     
+    <div class="container archive-calendar">
+    <div class="card">
+        <div id="post-calendar" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    let myChart = echarts.init(document.getElementById('post-calendar'));
+
+    
+
+    let option = {
+        title: {
+            top: 0,
+            text: '文章日历',
+            left: 'center',
+            textStyle: {
+                color: '#3C4858'
+            }
+        },
+        tooltip: {
+            padding: 10,
+            backgroundColor: '#555',
+            borderColor: '#777',
+            borderWidth: 1,
+            formatter: function (obj) {
+                var value = obj.value;
+                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
+            }
+        },
+        visualMap: {
+            show: true,
+            showLabel: true,
+            categories: [0, 1, 2, 3, 4],
+            calculable: true,
+            inRange: {
+                symbol: 'rect',
+                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+            },
+            itemWidth: 12,
+            itemHeight: 12,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 0
+        },
+        calendar: [{
+            left: 'center',
+            range: ["2021-01-26", "2022-01-26"],
+            cellSize: [13, 13],
+            splitLine: {
+                show: false
+            },
+            itemStyle: {
+                color: '#196127',
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            yearLabel: {
+                show: false
+            },
+            monthLabel: {
+                nameMap: 'cn',
+                fontSize: 11
+            },
+            dayLabel: {
+                formatter: '{start}  1st',
+                nameMap: 'cn',
+                fontSize: 11
+            }
+        }],
+        series: [{
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            calendarIndex: 0,
+            data: [["2021-01-26", 0], ["2021-01-27", 0], ["2021-01-28", 0], ["2021-01-29", 0], ["2021-01-30", 0], ["2021-01-31", 0], ["2021-02-01", 0], ["2021-02-02", 0], ["2021-02-03", 0], ["2021-02-04", 0], ["2021-02-05", 0], ["2021-02-06", 0], ["2021-02-07", 0], ["2021-02-08", 0], ["2021-02-09", 0], ["2021-02-10", 0], ["2021-02-11", 0], ["2021-02-12", 0], ["2021-02-13", 0], ["2021-02-14", 0], ["2021-02-15", 0], ["2021-02-16", 0], ["2021-02-17", 0], ["2021-02-18", 0], ["2021-02-19", 0], ["2021-02-20", 0], ["2021-02-21", 0], ["2021-02-22", 0], ["2021-02-23", 0], ["2021-02-24", 0], ["2021-02-25", 0], ["2021-02-26", 0], ["2021-02-27", 0], ["2021-02-28", 0], ["2021-03-01", 0], ["2021-03-02", 0], ["2021-03-03", 0], ["2021-03-04", 0], ["2021-03-05", 0], ["2021-03-06", 0], ["2021-03-07", 0], ["2021-03-08", 0], ["2021-03-09", 0], ["2021-03-10", 0], ["2021-03-11", 0], ["2021-03-12", 0], ["2021-03-13", 0], ["2021-03-14", 0], ["2021-03-15", 0], ["2021-03-16", 0], ["2021-03-17", 0], ["2021-03-18", 0], ["2021-03-19", 0], ["2021-03-20", 0], ["2021-03-21", 0], ["2021-03-22", 0], ["2021-03-23", 0], ["2021-03-24", 0], ["2021-03-25", 0], ["2021-03-26", 0], ["2021-03-27", 0], ["2021-03-28", 0], ["2021-03-29", 0], ["2021-03-30", 0], ["2021-03-31", 0], ["2021-04-01", 0], ["2021-04-02", 0], ["2021-04-03", 0], ["2021-04-04", 0], ["2021-04-05", 0], ["2021-04-06", 0], ["2021-04-07", 0], ["2021-04-08", 0], ["2021-04-09", 0], ["2021-04-10", 0], ["2021-04-11", 0], ["2021-04-12", 0], ["2021-04-13", 0], ["2021-04-14", 0], ["2021-04-15", 0], ["2021-04-16", 0], ["2021-04-17", 0], ["2021-04-18", 0], ["2021-04-19", 0], ["2021-04-20", 0], ["2021-04-21", 0], ["2021-04-22", 0], ["2021-04-23", 0], ["2021-04-24", 0], ["2021-04-25", 0], ["2021-04-26", 0], ["2021-04-27", 0], ["2021-04-28", 0], ["2021-04-29", 0], ["2021-04-30", 0], ["2021-05-01", 0], ["2021-05-02", 0], ["2021-05-03", 0], ["2021-05-04", 0], ["2021-05-05", 0], ["2021-05-06", 0], ["2021-05-07", 0], ["2021-05-08", 0], ["2021-05-09", 0], ["2021-05-10", 0], ["2021-05-11", 0], ["2021-05-12", 0], ["2021-05-13", 0], ["2021-05-14", 0], ["2021-05-15", 0], ["2021-05-16", 0], ["2021-05-17", 0], ["2021-05-18", 0], ["2021-05-19", 0], ["2021-05-20", 0], ["2021-05-21", 0], ["2021-05-22", 0], ["2021-05-23", 0], ["2021-05-24", 0], ["2021-05-25", 0], ["2021-05-26", 1], ["2021-05-27", 0], ["2021-05-28", 0], ["2021-05-29", 0], ["2021-05-30", 0], ["2021-05-31", 0], ["2021-06-01", 0], ["2021-06-02", 0], ["2021-06-03", 0], ["2021-06-04", 0], ["2021-06-05", 0], ["2021-06-06", 0], ["2021-06-07", 0], ["2021-06-08", 0], ["2021-06-09", 0], ["2021-06-10", 0], ["2021-06-11", 0], ["2021-06-12", 0], ["2021-06-13", 0], ["2021-06-14", 0], ["2021-06-15", 0], ["2021-06-16", 0], ["2021-06-17", 0], ["2021-06-18", 0], ["2021-06-19", 0], ["2021-06-20", 0], ["2021-06-21", 0], ["2021-06-22", 0], ["2021-06-23", 0], ["2021-06-24", 0], ["2021-06-25", 0], ["2021-06-26", 0], ["2021-06-27", 0], ["2021-06-28", 0], ["2021-06-29", 0], ["2021-06-30", 0], ["2021-07-01", 0], ["2021-07-02", 0], ["2021-07-03", 0], ["2021-07-04", 0], ["2021-07-05", 0], ["2021-07-06", 0], ["2021-07-07", 0], ["2021-07-08", 0], ["2021-07-09", 0], ["2021-07-10", 0], ["2021-07-11", 0], ["2021-07-12", 0], ["2021-07-13", 0], ["2021-07-14", 0], ["2021-07-15", 0], ["2021-07-16", 0], ["2021-07-17", 0], ["2021-07-18", 0], ["2021-07-19", 0], ["2021-07-20", 0], ["2021-07-21", 0], ["2021-07-22", 0], ["2021-07-23", 0], ["2021-07-24", 0], ["2021-07-25", 0], ["2021-07-26", 0], ["2021-07-27", 0], ["2021-07-28", 0], ["2021-07-29", 0], ["2021-07-30", 0], ["2021-07-31", 0], ["2021-08-01", 0], ["2021-08-02", 0], ["2021-08-03", 0], ["2021-08-04", 0], ["2021-08-05", 0], ["2021-08-06", 0], ["2021-08-07", 0], ["2021-08-08", 0], ["2021-08-09", 0], ["2021-08-10", 0], ["2021-08-11", 0], ["2021-08-12", 0], ["2021-08-13", 0], ["2021-08-14", 0], ["2021-08-15", 0], ["2021-08-16", 0], ["2021-08-17", 0], ["2021-08-18", 0], ["2021-08-19", 0], ["2021-08-20", 0], ["2021-08-21", 0], ["2021-08-22", 0], ["2021-08-23", 0], ["2021-08-24", 0], ["2021-08-25", 0], ["2021-08-26", 0], ["2021-08-27", 0], ["2021-08-28", 0], ["2021-08-29", 0], ["2021-08-30", 0], ["2021-08-31", 0], ["2021-09-01", 0], ["2021-09-02", 0], ["2021-09-03", 0], ["2021-09-04", 0], ["2021-09-05", 0], ["2021-09-06", 0], ["2021-09-07", 0], ["2021-09-08", 0], ["2021-09-09", 0], ["2021-09-10", 0], ["2021-09-11", 0], ["2021-09-12", 0], ["2021-09-13", 0], ["2021-09-14", 0], ["2021-09-15", 0], ["2021-09-16", 0], ["2021-09-17", 0], ["2021-09-18", 0], ["2021-09-19", 0], ["2021-09-20", 0], ["2021-09-21", 0], ["2021-09-22", 0], ["2021-09-23", 0], ["2021-09-24", 0], ["2021-09-25", 0], ["2021-09-26", 0], ["2021-09-27", 0], ["2021-09-28", 0], ["2021-09-29", 0], ["2021-09-30", 0], ["2021-10-01", 0], ["2021-10-02", 0], ["2021-10-03", 0], ["2021-10-04", 0], ["2021-10-05", 0], ["2021-10-06", 0], ["2021-10-07", 0], ["2021-10-08", 0], ["2021-10-09", 0], ["2021-10-10", 0], ["2021-10-11", 0], ["2021-10-12", 0], ["2021-10-13", 0], ["2021-10-14", 0], ["2021-10-15", 0], ["2021-10-16", 0], ["2021-10-17", 0], ["2021-10-18", 0], ["2021-10-19", 0], ["2021-10-20", 0], ["2021-10-21", 0], ["2021-10-22", 0], ["2021-10-23", 0], ["2021-10-24", 0], ["2021-10-25", 0], ["2021-10-26", 0], ["2021-10-27", 0], ["2021-10-28", 0], ["2021-10-29", 0], ["2021-10-30", 0], ["2021-10-31", 0], ["2021-11-01", 0], ["2021-11-02", 0], ["2021-11-03", 0], ["2021-11-04", 0], ["2021-11-05", 0], ["2021-11-06", 0], ["2021-11-07", 0], ["2021-11-08", 0], ["2021-11-09", 0], ["2021-11-10", 0], ["2021-11-11", 0], ["2021-11-12", 0], ["2021-11-13", 0], ["2021-11-14", 0], ["2021-11-15", 0], ["2021-11-16", 0], ["2021-11-17", 0], ["2021-11-18", 0], ["2021-11-19", 0], ["2021-11-20", 0], ["2021-11-21", 0], ["2021-11-22", 0], ["2021-11-23", 0], ["2021-11-24", 0], ["2021-11-25", 0], ["2021-11-26", 0], ["2021-11-27", 0], ["2021-11-28", 0], ["2021-11-29", 0], ["2021-11-30", 0], ["2021-12-01", 0], ["2021-12-02", 0], ["2021-12-03", 0], ["2021-12-04", 0], ["2021-12-05", 0], ["2021-12-06", 0], ["2021-12-07", 0], ["2021-12-08", 0], ["2021-12-09", 0], ["2021-12-10", 0], ["2021-12-11", 0], ["2021-12-12", 0], ["2021-12-13", 0], ["2021-12-14", 0], ["2021-12-15", 0], ["2021-12-16", 0], ["2021-12-17", 0], ["2021-12-18", 0], ["2021-12-19", 0], ["2021-12-20", 0], ["2021-12-21", 0], ["2021-12-22", 0], ["2021-12-23", 0], ["2021-12-24", 0], ["2021-12-25", 0], ["2021-12-26", 0], ["2021-12-27", 0], ["2021-12-28", 0], ["2021-12-29", 0], ["2021-12-30", 0], ["2021-12-31", 0], ["2022-01-01", 0], ["2022-01-02", 0], ["2022-01-03", 0], ["2022-01-04", 0], ["2022-01-05", 0], ["2022-01-06", 0], ["2022-01-07", 1], ["2022-01-08", 0], ["2022-01-09", 0], ["2022-01-10", 0], ["2022-01-11", 0], ["2022-01-12", 0], ["2022-01-13", 0], ["2022-01-14", 0], ["2022-01-15", 0], ["2022-01-16", 0], ["2022-01-17", 1], ["2022-01-18", 0], ["2022-01-19", 0], ["2022-01-20", 0], ["2022-01-21", 0], ["2022-01-22", 0], ["2022-01-23", 0], ["2022-01-24", 0], ["2022-01-25", 0], ["2022-01-26", 2]]
+        }]
+
+    };
+
+    myChart.setOption(option);
+</script>
+
+    
+
+    
+
+    <div id="cd-timeline" class="container">
+        
+        <div class="cd-timeline-block">
+
+            
+            
+            
+            <div class="cd-timeline-img year" data-aos="zoom-in-up">
+                <a href="/archives/2021">2021</a>
+            </div>
+            
+
+            
+            
+            
+            <div class="cd-timeline-img month" data-aos="zoom-in-up">
+                <a href="/archives/2021/05">05</a>
+            </div>
+            
+
+            
+            <div class="cd-timeline-img day" data-aos="zoom-in-up">
+                <span>26</span>
+            </div>
+            <article class="cd-timeline-content" data-aos="fade-up">
+                <div class="article col s12 m6">
+                    <div class="card">
+                        <a href="/2021/05/26/zhong-tai-de-zong-jie/">
+                            <div class="card-image">
+                                
+                                
+                                <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="中台的总结">
+                                
+                                <span class="card-title">中台的总结</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    原公司结合业态搭建了一套商城的业务中台，有了这套中台后可以快速启动一个新的应用应对市场的多变和公司业态的扩展，对此结合网上文档、视频总结的一些看法
+中台价值中台是一种组织心智，也是一种经营理念，提供公司的组织效率、协同效率、运营效率
+中台总
+                                
+                            </div>
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="far fa-clock fa-fw icon-date"></i>2021-05-26
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                    
+                                    <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                    </a>
+                                    
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="card-action article-tags">
+                            
+                            <a href="/tags/%E4%B8%AD%E5%8F%B0/"><span class="chip bg-color">中台</span></a>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+    </div>
 
 </main>
 
