@@ -8,6 +8,7 @@ mathjax: false
 categories: JAVA
 tags:
   - Drools
+  - Java
 ---
 这一部分学习的时候是看的黑马博学谷的学习视频。下面笔记也是随堂笔记。
 笔者放在这里是为了方便观看，如有侵权，请联系删除。
