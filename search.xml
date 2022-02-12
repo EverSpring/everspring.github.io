@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>了解开源协议</title>
+      <link href="/2022/02/12/kai-yuan-xie-yi/"/>
+      <url>/2022/02/12/kai-yuan-xie-yi/</url>
+      
+        <content type="html"><![CDATA[<p>最近关于开源代码的新闻层出不穷，比如fake.js作者删除了所有代码引起的争论战火。而牵引开源代码的线–开源协议也被大家重视起来，之前国内开发人员对开源协议不太重视，随便找了几个周边的同行，对各种开源协议都分不清楚。网上了解了一翻，做个总结</p><p>感谢以下文章、视频作者提供资料，如有侵权请联系。</p><ol><li><a href="https://www.bilibili.com/video/BV1i3411b7xp?from=search&seid=7966784787421644790&spm_id_from=333.337.0.0">《最流行的开源协议什么，如何选择合适的开源协议？中国第一个违反GPL的案例，腾讯影音为什么会被ffmepg谴责——TechParty1204小沙龙第2个主题分享》</a></li><li><a href="https://www.runoob.com/w3cnote/open-source-license.html">《各种开源协议介绍》</a></li></ol><h3 id="一、-开源协议的六个特性"><a href="#一、-开源协议的六个特性" class="headerlink" title="一、 开源协议的六个特性"></a>一、 开源协议的六个特性</h3><p><img src="https://gitee.com/EverSpring007/picbed/raw/master/image-20220213004304500.png" alt="image-20220213004304500"></p><h3 id="二、如何选择开源协议"><a href="#二、如何选择开源协议" class="headerlink" title="二、如何选择开源协议"></a>二、如何选择开源协议</h3><p><img src="https://www.runoob.com/wp-content/uploads/2018/03/bg2011050101.png" alt="img"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 规范 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>后端JAVA开发规范</title>
       <link href="/2022/01/26/hou-duan-java-kai-fa-gui-fan/"/>
       <url>/2022/01/26/hou-duan-java-kai-fa-gui-fan/</url>
@@ -47,9 +72,9 @@
       
         <tags>
             
-            <tag> Drools </tag>
-            
             <tag> Java </tag>
+            
+            <tag> Drools </tag>
             
         </tags>
       
@@ -74,9 +99,9 @@
       
         <tags>
             
-            <tag> MySQL </tag>
-            
             <tag> 规范 </tag>
+            
+            <tag> MySQL </tag>
             
         </tags>
       
@@ -101,9 +126,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> Redis </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
