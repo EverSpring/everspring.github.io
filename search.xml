@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>MySQL字符串相加引发的血案</title>
+      <link href="/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/"/>
+      <url>/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/</url>
+      
+        <content type="html"><![CDATA[<p>晚上接到同事电话，说有几十张表的数据全被删除了，当时懵逼了。<br>先说背景：环境是MySQL 5.7.16，数据是在运维过程中运行的DELETE语句导致。选择其中一条为例</p><pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>fcexam的bussno结构为varchar，本意是删除GBD000000016323、GBD000000016325这两条数据，但把,写成了+。delete from改成select查询一次，发现数据全被查出来了，所以delete的所有数据。<br><strong>原因分析</strong><br>这跟MySQL中字符串加减乘除、字符串与0/1比较有关。</p><h4 id="1-字符串加减乘除"><a href="#1-字符串加减乘除" class="headerlink" title="1. 字符串加减乘除"></a>1. 字符串加减乘除</h4><blockquote><p>在mysql当中,字符串类型间进行加减乘除运算的时候,会<code>截取字符串以数字开头的那一部分数字进行运算</code>,如果字符串前面没有数字,那么就只能截取的数值为0,那么进行加减的时候结果都是0,进行乘除的时候结果都是NULL<br>感谢链接作者：不姓马的小马哥<br>文章地址：<a href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></p></blockquote><pre class="line-numbers language-none"><code class="language-none">select (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为0select (&#39;GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为nullselect (&#39;GBD000000016323&#39;*&#39;GBD000000016325&#39;); --结果为0select (&#39;1GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为1select (&#39;1GBD000000016323&#39;+&#39;2GBD000000016325&#39;); --结果为3select (&#39;1GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="2-字符串与0、1比较"><a href="#2-字符串与0、1比较" class="headerlink" title="2. 字符串与0、1比较"></a>2. 字符串与0、1比较</h4><p>MySQL boolean类型0代表false，1代表true。字符串开头没有数字时与0、1比较，如果是和0比较，得到的结果是1也就是true，和其他数字比较结果是0也就是false</p><pre class="line-numbers language-none"><code class="language-none">select &#39;GBD000000016323&#39;&#x3D;0; --结果为1select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>所以在我们跑的脚本里面，因为bussno都是’GBD’开头，转换出来就是where 0 = 0，where条件结果为true就把所以数据都查询出来了。</p><pre class="line-numbers language-none"><code class="language-none">select * from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --等于是select * from fcexam where 0 in (0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>假如bussno有3条数据，’GBD000000016323’，’GBD000000016325’，’2GBD000000016325’，用上面的SQL只能查出前面2条，最后一条因为是2开头所以查询不出来</p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这条SQL相当于就是</p><pre class="line-numbers language-none"><code class="language-none">delete from fcexam where 0 in (0)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>参考资料：</p><ol><li><a href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></li><li><a href="https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true">https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>了解开源协议</title>
       <link href="/2022/02/12/kai-yuan-xie-yi/"/>
       <url>/2022/02/12/kai-yuan-xie-yi/</url>
