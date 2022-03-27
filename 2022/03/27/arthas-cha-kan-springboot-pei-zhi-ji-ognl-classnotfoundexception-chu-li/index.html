@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MySQL字符串相加引发的血案, EverSpring Blog">
-    <meta name="description" content="晚上接到同事电话，说有几十张表的数据全被删除了，当时懵逼了。先说背景：环境是MySQL 5.7.16，数据是在运维过程中运行的DELETE语句导致。选择其中一条为例
-delete from fcexam where bussno in (&amp;">
+    <meta name="keywords" content="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理, EverSpring Blog">
+    <meta name="description" content="能讲到这篇文章的同学已经知道Arthas是什么了，这里就不多余赘述，本文介绍一下通过Arthas查看SpringBoot工程的配置及曾遇到过的问题。本文相关知识：sc，ognl，spring配置保存的地方
+
+注意：ognl是3.5.0以后出">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@ delete from fcexam where bussno in (&amp;">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MySQL字符串相加引发的血案 | EverSpring Blog</title>
+    <title>Arthas查看SpringBoot配置及ognl ClassNotFoundException处理 | EverSpring Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -288,12 +289,12 @@ delete from fcexam where bussno in (&amp;">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MySQL字符串相加引发的血案</h1>
+                    <h1 class="description center-align post-title">Arthas查看SpringBoot配置及ognl ClassNotFoundException处理</h1>
                 </div>
             </div>
         </div>
@@ -315,8 +316,12 @@ delete from fcexam where bussno in (&amp;">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MySQL/">
-                                <span class="chip bg-color">MySQL</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/Arthas/">
+                                <span class="chip bg-color">Arthas</span>
                             </a>
                         
                     </div>
@@ -327,8 +332,8 @@ delete from fcexam where bussno in (&amp;">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
+                            <a href="/categories/JAVA/" class="post-category">
+                                JAVA
                             </a>
                         
                     </div>
@@ -340,7 +345,7 @@ delete from fcexam where bussno in (&amp;">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-16
+                    2022-03-27
                 </div>
                 
 
@@ -349,7 +354,7 @@ delete from fcexam where bussno in (&amp;">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    582
+                    543
                 </div>
                 
 
@@ -379,36 +384,67 @@ delete from fcexam where bussno in (&amp;">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>晚上接到同事电话，说有几十张表的数据全被删除了，当时懵逼了。<br>先说背景：环境是MySQL 5.7.16，数据是在运维过程中运行的DELETE语句导致。选择其中一条为例</p>
-<pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>fcexam的bussno结构为varchar，本意是删除GBD000000016323、GBD000000016325这两条数据，但把,写成了+。delete from改成select查询一次，发现数据全被查出来了，所以delete的所有数据。<br><strong>原因分析</strong><br>这跟MySQL中字符串加减乘除、字符串与0/1比较有关。</p>
-<h4 id="1-字符串加减乘除"><a href="#1-字符串加减乘除" class="headerlink" title="1. 字符串加减乘除"></a>1. 字符串加减乘除</h4><blockquote>
-<p>在mysql当中,字符串类型间进行加减乘除运算的时候,会<code>截取字符串以数字开头的那一部分数字进行运算</code>,如果字符串前面没有数字,那么就只能截取的数值为0,那么进行加减的时候结果都是0,进行乘除的时候结果都是NULL<br>感谢链接作者：不姓马的小马哥<br>文章地址：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></p>
+                <p>能讲到这篇文章的同学已经知道Arthas是什么了，这里就不多余赘述，本文介绍一下通过Arthas查看SpringBoot工程的配置及曾遇到过的问题。<br>本文相关知识：<code>sc</code>，<code>ognl</code>，<code>spring配置保存的地方</code></p>
+<blockquote>
+<p>注意：ognl是3.5.0以后出现的</p>
 </blockquote>
-<pre class="line-numbers language-none"><code class="language-none">select (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为0
-select (&#39;GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为null
-select (&#39;GBD000000016323&#39;*&#39;GBD000000016325&#39;); --结果为0
-
-select (&#39;1GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为1
-select (&#39;1GBD000000016323&#39;+&#39;2GBD000000016325&#39;); --结果为3
-select (&#39;1GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="2-字符串与0、1比较"><a href="#2-字符串与0、1比较" class="headerlink" title="2. 字符串与0、1比较"></a>2. 字符串与0、1比较</h4><p>MySQL boolean类型0代表false，1代表true。字符串开头没有数字时与0、1比较，如果是和0比较，得到的结果是1也就是true，和其他数字比较结果是0也就是false</p>
-<pre class="line-numbers language-none"><code class="language-none">select &#39;GBD000000016323&#39;&#x3D;0; --结果为1
-select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>所以在我们跑的脚本里面，因为bussno都是’GBD’开头，转换出来就是where 0 = 0，where条件结果为true就把所以数据都查询出来了。</p>
-<pre class="line-numbers language-none"><code class="language-none">select * from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --等于是select * from fcexam where 0 in (0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>假如bussno有3条数据，’GBD000000016323’，’GBD000000016325’，’2GBD000000016325’，用上面的SQL只能查出前面2条，最后一条因为是2开头所以查询不出来</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这条SQL相当于就是</p>
-<pre class="line-numbers language-none"><code class="language-none">delete from fcexam where 0 in (0)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>参考资料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true">https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true</a></li>
+<li>arthas有可以查看JVM环境变量的<code>sysenv</code>，也有可以查看和修改JVM的系统属性的<code>sysprop</code>，但SpringBoot配置文件的内容不是在环境变量和系统属性中的，而是在<code>ConfigurableApplicationContext</code>的<code>environment</code>。<code>ConfigurableApplicationContext</code>继承自<code>ApplicationContext</code>，在我们的工程中经常要用到ApplicationContext，可以从ApplicationContext入手拿到environment。</li>
+<li>通过ognl表达式获取，ognl在java中运用广泛，比如Spring Cache的注解、Spring @Value注解都有用到。假如工程下有一个com.xxx.spring.util.SpringUtils（见文末）可以获取到ApplicationContext，想要获取到application.yml中在server.port的值，可以采用如下方法<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.xxx.util.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;server.port&quot;)&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>#context –代表的变量<br>@com.xxx.util.SpringUtils –指定的类<br>@applicationContext –类的属性<br>#context.getEnvironment().getProperty(“server.port”) –通过context获取到environment属性，然后再通过environment获取到property的值</p>
+</blockquote>
+</li>
+<li>有些情况下通过ognl获取applicationContext的时候会出现<code>ClassNotFoundException</code>，详情如下：<blockquote>
+<p>Failed to execute ognl, exception message: ognl.OgnlException: Could not get static field applicationContext from class com.xxx.util.SpringUtils [java.lang.ClassNotFoundException: Unable to resolve class: com.xxx.util.SpringUtils], please check $HOME/logs/arthas/arthas.log for more details.</p>
+</blockquote>
+</li>
 </ol>
+<p>出现此类问题是由于classloader不是默认加载器导致，见官网issue：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71</a><br><strong>解决方法：</strong> </p>
+<ul>
+<li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p><img src="https://gitee.com/EverSpring007/picbed/raw/master/image-20220327234537394.png" alt="image-20220327234537394"></p>
+<p>获取到classLoaderHash值</p>
+<ul>
+<li>2.使用指定的classloader。ognl -c classloader的hash值<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.jinju.juke.common.utils.spring.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;dev.name&quot;)&#39; -c 20ad941<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<hr>
+<p>SpringUtils的代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">SpringUtils</span> <span class="token keyword">implements</span> <span class="token class-name">BeanFactoryPostProcessor</span><span class="token punctuation">,</span> <span class="token class-name">ApplicationContextAware</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">/** Spring应用上下文环境 */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ConfigurableListableBeanFactory</span> beanFactory<span class="token punctuation">;</span>
 
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">postProcessBeanFactory</span><span class="token punctuation">(</span><span class="token class-name">ConfigurableListableBeanFactory</span> beanFactory<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringUtils</span><span class="token punctuation">.</span>beanFactory <span class="token operator">=</span> beanFactory<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringUtils</span><span class="token punctuation">.</span>applicationContext <span class="token operator">=</span> applicationContext<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+     * 获取对象
+     *
+     * @param name
+     * @return Object 一个以所给名字注册的bean的实例
+     * @throws org.springframework.beans.BeansException
+     *
+     */</span>
+    <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">getBean</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">T</span><span class="token punctuation">)</span> beanFactory<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -434,7 +470,7 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://everspring.github.io/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/">https://everspring.github.io/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/</a>
+                    <a href="https://everspring.github.io/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/">https://everspring.github.io/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -472,8 +508,12 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/MySQL/">
-                                    <span class="chip bg-color">MySQL</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/Arthas/">
+                                    <span class="chip bg-color">Arthas</span>
                                 </a>
                             
                         </div>
@@ -647,9 +687,10 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/">
                     <div class="card-image">
@@ -667,9 +708,9 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -682,6 +723,7 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -704,13 +746,13 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/12/kai-yuan-xie-yi/">
+                <a href="/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="了解开源协议">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="MySQL字符串相加引发的血案">
                         
-                        <span class="card-title">了解开源协议</span>
+                        <span class="card-title">MySQL字符串相加引发的血案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -721,14 +763,14 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
-                                    架构
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
                                 </a>
                             
                             
@@ -738,8 +780,8 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">规范</span>
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
                     </a>
                     
                 </div>
