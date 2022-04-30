@@ -4,10 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理, EverSpring Blog">
-    <meta name="description" content="能讲到这篇文章的同学已经知道Arthas是什么了，这里就不多余赘述，本文介绍一下通过Arthas查看SpringBoot工程的配置及曾遇到过的问题。本文相关知识：sc，ognl，spring配置保存的地方
+    <meta name="keywords" content="kali系列-一.kali U盘安装, EverSpring Blog">
+    <meta name="description" content="kali系统是渗透测试的瑞士军刀，集成了大部分常用的Hack工具。说说U盘安装kali的好处：
 
-注意：ognl是3.5.0以后出">
+虚拟机安装kali，不支持wifi，如果要支持wifi需要额外使用无线网卡
+不用虚拟机，要么装双系统、要么再准备一台电脑（土豪随意）
+装电脑里">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Arthas查看SpringBoot配置及ognl ClassNotFoundException处理 | EverSpring Blog</title>
+    <title>kali系列-一.kali U盘安装 | EverSpring Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -289,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Arthas查看SpringBoot配置及ognl ClassNotFoundException处理</h1>
+                    <h1 class="description center-align post-title">kali系列-一.kali U盘安装</h1>
                 </div>
             </div>
         </div>
@@ -316,12 +318,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Arthas/">
-                                <span class="chip bg-color">Arthas</span>
+                            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+                                <span class="chip bg-color">渗透测试</span>
                             </a>
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/kali-U%E7%9B%98%E5%AE%89%E8%A3%85/">
+                                <span class="chip bg-color">kali U盘安装</span>
                             </a>
                         
                     </div>
@@ -332,8 +334,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JAVA/" class="post-category">
-                                JAVA
+                            <a href="/categories/kali/" class="post-category">
+                                kali
                             </a>
                         
                     </div>
@@ -345,7 +347,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-27
+                    2022-04-30
                 </div>
                 
 
@@ -354,14 +356,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    543
+                    417
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -384,67 +386,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>能讲到这篇文章的同学已经知道Arthas是什么了，这里就不多余赘述，本文介绍一下通过Arthas查看SpringBoot工程的配置及曾遇到过的问题。<br>本文相关知识：<code>sc</code>，<code>ognl</code>，<code>spring配置保存的地方</code></p>
-<blockquote>
-<p>注意：ognl是3.5.0以后出现的</p>
-</blockquote>
+                <p>kali系统是渗透测试的瑞士军刀，集成了大部分常用的Hack工具。<br>说说U盘安装kali的好处：</p>
 <ol>
-<li>arthas有可以查看JVM环境变量的<code>sysenv</code>，也有可以查看和修改JVM的系统属性的<code>sysprop</code>，但SpringBoot配置文件的内容不是在环境变量和系统属性中的，而是在<code>ConfigurableApplicationContext</code>的<code>environment</code>。<code>ConfigurableApplicationContext</code>继承自<code>ApplicationContext</code>，在我们的工程中经常要用到ApplicationContext，可以从ApplicationContext入手拿到environment。</li>
-<li>通过ognl表达式获取，ognl在java中运用广泛，比如Spring Cache的注解、Spring @Value注解都有用到。假如工程下有一个com.xxx.spring.util.SpringUtils（见文末）可以获取到ApplicationContext，想要获取到application.yml中在server.port的值，可以采用如下方法<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.xxx.util.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;server.port&quot;)&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>#context –代表的变量<br>@com.xxx.util.SpringUtils –指定的类<br>@applicationContext –类的属性<br>#context.getEnvironment().getProperty(“server.port”) –通过context获取到environment属性，然后再通过environment获取到property的值</p>
-</blockquote>
-</li>
-<li>有些情况下通过ognl获取applicationContext的时候会出现<code>ClassNotFoundException</code>，详情如下：<blockquote>
-<p>Failed to execute ognl, exception message: ognl.OgnlException: Could not get static field applicationContext from class com.xxx.util.SpringUtils [java.lang.ClassNotFoundException: Unable to resolve class: com.xxx.util.SpringUtils], please check $HOME/logs/arthas/arthas.log for more details.</p>
-</blockquote>
-</li>
+<li>虚拟机安装kali，不支持wifi，如果要支持wifi需要额外使用无线网卡</li>
+<li>不用虚拟机，要么装双系统、要么再准备一台电脑（土豪随意）</li>
+<li>装电脑里不方便携带</li>
 </ol>
-<p>出现此类问题是由于classloader不是默认加载器导致，见官网issue：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71</a><br><strong>解决方法：</strong> </p>
-<ul>
-<li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><ul>
+<li>U盘<br>建议USB 3.0，2.0比较卡。<br>至少16G，建议32G以上</li>
+<li>DiskGenius U盘分区工具<br>百度找</li>
+<li>Universal-USB-Installer iso系统镜像烧录工具<br>下载地址：<a target="_blank" rel="noopener" href="http://downza.51speed.top/2022/02/08/UniversalUSB.rar?timestamp=626cdc34&amp;auth_key=332de8aadceebdf3002d5c208110e680">http://downza.51speed.top/2022/02/08/UniversalUSB.rar?timestamp=626cdc34&amp;auth_key=332de8aadceebdf3002d5c208110e680</a><br>推荐使用，原因：小巧，只有2M左右。<br>不推荐UltraISO，我这烧录后有问题</li>
+<li>kali live iso镜像下载<br>我的是2021.2-live-amd64.iso<br>镜像地址，国外的下载慢，建议用国内的。<br>清华大学镜像：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/kali-images/">https://mirrors.tuna.tsinghua.edu.cn/kali-images/</a><br>中国科学技术大学：<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/kali-images/">https://mirrors.ustc.edu.cn/kali-images/</a></li>
 </ul>
-<p><img src="https://gitee.com/EverSpring007/picbed/raw/master/image-20220327234537394.png" alt="image-20220327234537394"></p>
-<p>获取到classLoaderHash值</p>
-<ul>
-<li>2.使用指定的classloader。ognl -c classloader的hash值<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.jinju.juke.common.utils.spring.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;dev.name&quot;)&#39; -c 20ad941<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<h3 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h3><ul>
+<li><p><strong>1. DiskGenius分区</strong></p>
+<img src="kali系列-1-kali安装/image-20220430234203883.png" alt="图1" style="zoom: 50%;" />
+<img src="kali系列-1-kali安装/image-20220430234915455.png" alt="图2" style="zoom: 50%;" />
+<img src="kali系列-1-kali安装/image-20220430235104169.png" alt="image-20220430235104169" style="zoom:50%;" />
+<img src="kali系列-1-kali安装/image-20220430235741924.png" alt="image-20220430235741924" style="zoom:50%;" />
+<img src="kali系列-1-kali安装/image-20220430235926700.png" alt="image-20220430235926700" style="zoom:50%;" /></li>
+<li><p><strong>2. Universal-USB-Installer烧制启动盘</strong></p>
+</li>
 </ul>
-<hr>
-<p>SpringUtils的代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">SpringUtils</span> <span class="token keyword">implements</span> <span class="token class-name">BeanFactoryPostProcessor</span><span class="token punctuation">,</span> <span class="token class-name">ApplicationContextAware</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token comment">/** Spring应用上下文环境 */</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ConfigurableListableBeanFactory</span> beanFactory<span class="token punctuation">;</span>
+<img src="kali系列-1-kali安装/i=f35d3b86f67b44b6a88207b7366e8e93.png" style="zoom: 80%;" />
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">;</span>
+<p>完成后得到了一个可以u盘启动的kali 操作系统，即kali live usb</p>
+<ul>
+<li><p><strong>3. U盘启动</strong><br>在第2步烧制后，重启电脑，进入BIOS系统。进入BIOS系统各品牌的方式，见<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/cbf0e500b4c71b2eaa2893fd.html">https://jingyan.baidu.com/article/cbf0e500b4c71b2eaa2893fd.html</a></p>
+<img src="kali系列-1-kali安装/image-20220501000544177.png" alt="image-20220501000544177" style="zoom: 67%;" /></li>
+</ul>
+<p>进入系统后这两种都可以。下面一种是自动支持持久化的，但持久化的是文件，系统配置持久化暂时还没找到方法</p>
+<blockquote>
+<p>kali 2019后系统的用户是kali，密码也是kali。<br>系统没有提供root用户，但提供了sudo权限，所以后续一些提示权限不足的，就用sudo xxx执行即可</p>
+</blockquote>
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">postProcessBeanFactory</span><span class="token punctuation">(</span><span class="token class-name">ConfigurableListableBeanFactory</span> beanFactory<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token class-name">SpringUtils</span><span class="token punctuation">.</span>beanFactory <span class="token operator">=</span> beanFactory<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token class-name">SpringUtils</span><span class="token punctuation">.</span>applicationContext <span class="token operator">=</span> applicationContext<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 获取对象
-     *
-     * @param name
-     * @return Object 一个以所给名字注册的bean的实例
-     * @throws org.springframework.beans.BeansException
-     *
-     */</span>
-    <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">getBean</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">T</span><span class="token punctuation">)</span> beanFactory<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -470,7 +445,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://everspring.github.io/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/">https://everspring.github.io/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/</a>
+                    <a href="https://everspring.github.io/2022/04/30/kali-xi-lie-1-kali-an-zhuang/">https://everspring.github.io/2022/04/30/kali-xi-lie-1-kali-an-zhuang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -508,12 +483,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Arthas/">
-                                    <span class="chip bg-color">Arthas</span>
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+                                    <span class="chip bg-color">渗透测试</span>
                                 </a>
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/kali-U%E7%9B%98%E5%AE%89%E8%A3%85/">
+                                    <span class="chip bg-color">kali U盘安装</span>
                                 </a>
                             
                         </div>
@@ -687,9 +662,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/04/30/kali-xi-lie-1-kali-an-zhuang/">
                     <div class="card-image">
@@ -707,9 +683,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -722,6 +698,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -744,13 +721,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/">
+                <a href="/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="MySQL字符串相加引发的血案">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理">
                         
-                        <span class="card-title">MySQL字符串相加引发的血案</span>
+                        <span class="card-title">Arthas查看SpringBoot配置及ognl ClassNotFoundException处理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -761,14 +738,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-27
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
+                            <a href="/categories/JAVA/" class="post-category">
+                                    JAVA
                                 </a>
                             
                             
@@ -778,8 +755,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/Arthas/">
+                        <span class="chip bg-color">Arthas</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
