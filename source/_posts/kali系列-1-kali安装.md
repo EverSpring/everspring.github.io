@@ -34,7 +34,7 @@ kali系统是渗透测试的瑞士军刀，集成了大部分常用的Hack工具
 
 ### 二、使用
 * **1. DiskGenius分区**
-
+![](image-20220430234203883.png)
   <img src="kali系列-1-kali安装/image-20220430234203883.png" alt="图1" style="zoom: 50%;" />
   <img src="kali系列-1-kali安装/image-20220430234915455.png" alt="图2" style="zoom: 50%;" />
   <img src="kali系列-1-kali安装/image-20220430235104169.png" alt="image-20220430235104169" style="zoom:50%;" />
