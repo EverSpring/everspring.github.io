@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>kali系列-一.kali U盘安装</title>
+      <link href="/2022/04/30/kali-xi-lie-1-kali-an-zhuang/"/>
+      <url>/2022/04/30/kali-xi-lie-1-kali-an-zhuang/</url>
+      
+        <content type="html"><![CDATA[<p>kali系统是渗透测试的瑞士军刀，集成了大部分常用的Hack工具。<br>说说U盘安装kali的好处：</p><ol><li>虚拟机安装kali，不支持wifi，如果要支持wifi需要额外使用无线网卡</li><li>不用虚拟机，要么装双系统、要么再准备一台电脑（土豪随意）</li><li>装电脑里不方便携带</li></ol><h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><ul><li>U盘<br>建议USB 3.0，2.0比较卡。<br>至少16G，建议32G以上</li><li>DiskGenius U盘分区工具<br>百度找</li><li>Universal-USB-Installer iso系统镜像烧录工具<br>下载地址：<a href="http://downza.51speed.top/2022/02/08/UniversalUSB.rar?timestamp=626cdc34&amp;auth_key=332de8aadceebdf3002d5c208110e680">http://downza.51speed.top/2022/02/08/UniversalUSB.rar?timestamp=626cdc34&amp;auth_key=332de8aadceebdf3002d5c208110e680</a><br>推荐使用，原因：小巧，只有2M左右。<br>不推荐UltraISO，我这烧录后有问题</li><li>kali live iso镜像下载<br>我的是2021.2-live-amd64.iso<br>镜像地址，国外的下载慢，建议用国内的。<br>清华大学镜像：<a href="https://mirrors.tuna.tsinghua.edu.cn/kali-images/">https://mirrors.tuna.tsinghua.edu.cn/kali-images/</a><br>中国科学技术大学：<a href="https://mirrors.ustc.edu.cn/kali-images/">https://mirrors.ustc.edu.cn/kali-images/</a></li></ul><h3 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h3><ul><li><p><strong>1. DiskGenius分区</strong></p><img src="kali系列-1-kali安装/image-20220430234203883.png" alt="图1" style="zoom: 50%;" /><img src="kali系列-1-kali安装/image-20220430234915455.png" alt="图2" style="zoom: 50%;" /><img src="kali系列-1-kali安装/image-20220430235104169.png" alt="image-20220430235104169" style="zoom:50%;" /><img src="kali系列-1-kali安装/image-20220430235741924.png" alt="image-20220430235741924" style="zoom:50%;" /><img src="kali系列-1-kali安装/image-20220430235926700.png" alt="image-20220430235926700" style="zoom:50%;" /></li><li><p><strong>2. Universal-USB-Installer烧制启动盘</strong></p></li></ul><img src="kali系列-1-kali安装/i=f35d3b86f67b44b6a88207b7366e8e93.png" style="zoom: 80%;" /><p>完成后得到了一个可以u盘启动的kali 操作系统，即kali live usb</p><ul><li><p><strong>3. U盘启动</strong><br>在第2步烧制后，重启电脑，进入BIOS系统。进入BIOS系统各品牌的方式，见<a href="https://jingyan.baidu.com/article/cbf0e500b4c71b2eaa2893fd.html">https://jingyan.baidu.com/article/cbf0e500b4c71b2eaa2893fd.html</a></p><img src="kali系列-1-kali安装/image-20220501000544177.png" alt="image-20220501000544177" style="zoom: 67%;" /></li></ul><p>进入系统后这两种都可以。下面一种是自动支持持久化的，但持久化的是文件，系统配置持久化暂时还没找到方法</p><blockquote><p>kali 2019后系统的用户是kali，密码也是kali。<br>系统没有提供root用户，但提供了sudo权限，所以后续一些提示权限不足的，就用sudo xxx执行即可</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> kali </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 渗透测试 </tag>
+            
+            <tag> kali U盘安装 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Arthas查看SpringBoot配置及ognl ClassNotFoundException处理</title>
       <link href="/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/"/>
       <url>/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/</url>
@@ -20,9 +47,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Arthas </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -97,9 +124,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> Java </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
