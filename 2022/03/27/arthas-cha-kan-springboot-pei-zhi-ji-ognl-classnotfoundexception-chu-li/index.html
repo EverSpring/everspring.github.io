@@ -354,7 +354,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    546
+                    561
                 </div>
                 
 
@@ -404,7 +404,7 @@
 <ul>
 <li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<p><img src="https://gitee.com/EverSpring007/picbed/raw/master/image-20220327234537394.png" alt="image-20220327234537394"></p>
+<p>![image-20220327234537394](Arthas查看SpringBoot配置及ognl ClassNotFoundException处理&#x2F;image-20220327234537394.png)</p>
 <p>获取到classLoaderHash值</p>
 <ul>
 <li>2.使用指定的classloader。ognl -c classloader的hash值<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.jinju.juke.common.utils.spring.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;dev.name&quot;)&#39; -c 20ad941<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
