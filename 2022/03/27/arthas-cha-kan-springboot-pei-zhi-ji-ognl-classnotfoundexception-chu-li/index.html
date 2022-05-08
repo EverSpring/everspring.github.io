@@ -354,7 +354,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    561
+                    546
                 </div>
                 
 
@@ -402,9 +402,9 @@
 </ol>
 <p>出现此类问题是由于classloader不是默认加载器导致，见官网issue：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71</a><br><strong>解决方法：</strong> </p>
 <ul>
-<li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/image-20220327234537394.png" alt="图1" style="zoom: 50%;"></li>
 </ul>
-<p>![image-20220327234537394](Arthas查看SpringBoot配置及ognl ClassNotFoundException处理&#x2F;image-20220327234537394.png)</p>
 <p>获取到classLoaderHash值</p>
 <ul>
 <li>2.使用指定的classloader。ognl -c classloader的hash值<pre class="line-numbers language-none"><code class="language-none">ognl &#39;#context&#x3D;@com.jinju.juke.common.utils.spring.SpringUtils@applicationContext,#context.getEnvironment().getProperty(&quot;dev.name&quot;)&#39; -c 20ad941<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
