@@ -34,22 +34,21 @@ kali系统是渗透测试的瑞士军刀，集成了大部分常用的Hack工具
 
 ### 二、使用
 * **1. DiskGenius分区**
-  <img src="kali系列-1-kali安装/image-20220430234203883.png" alt="图1" style="zoom: 50%;" />
-  <img src="kali系列-1-kali安装/image-20220430234915455.png" alt="图2" style="zoom: 50%;" />
-  <img src="kali系列-1-kali安装/image-20220430235104169.png" alt="image-20220430235104169" style="zoom:50%;" />
-  <img src="kali系列-1-kali安装/image-20220430235741924.png" alt="image-20220430235741924" style="zoom:50%;" />
-  <img src="kali系列-1-kali安装/image-20220430235926700.png" alt="image-20220430235926700" style="zoom:50%;" />
-
+  <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082341257.png" alt="图1" style="zoom: 50%;" />
+  <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082341891.png" alt="图2" style="zoom: 50%;" />
+* <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082342164.png" alt="image-20220430235104169" style="zoom:50%;" />
+  <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082342039.png" alt="image-20220430235741924" style="zoom:50%;" />
+  <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082342428.png" alt="image-20220430235926700" style="zoom:50%;" />
 * **2. Universal-USB-Installer烧制启动盘**
 
-<img src="kali系列-1-kali安装/i=f35d3b86f67b44b6a88207b7366e8e93.png" style="zoom: 80%;" />
+<img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082342833.png" style="zoom: 80%;" />
 
 完成后得到了一个可以u盘启动的kali 操作系统，即kali live usb
 
 * **3. U盘启动**
   在第2步烧制后，重启电脑，进入BIOS系统。进入BIOS系统各品牌的方式，见https://jingyan.baidu.com/article/cbf0e500b4c71b2eaa2893fd.html
 
-  <img src="kali系列-1-kali安装/image-20220501000544177.png" alt="image-20220501000544177" style="zoom: 67%;" />
+  <img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082342387.png" alt="image-20220501000544177" style="zoom: 67%;" />
 
 进入系统后这两种都可以。下面一种是自动支持持久化的，但持久化的是文件，系统配置持久化暂时还没找到方法
 > kali 2019后系统的用户是kali，密码也是kali。

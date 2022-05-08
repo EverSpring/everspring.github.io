@@ -31,7 +31,7 @@ ognl '#context=@com.xxx.util.SpringUtils@applicationContext,#context.getEnvironm
 ```
 sc -d com.xxx.util.SpringUtils
 ```
-<img src="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理/image-20220327234537394.png" alt="图1" style="zoom: 50%;" />
+<img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082343338.png" alt="图1" style="zoom: 50%;" />
 
 获取到classLoaderHash值
 * 2.使用指定的classloader。ognl -c classloader的hash值
