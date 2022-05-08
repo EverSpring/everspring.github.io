@@ -32,7 +32,7 @@ ognl '#context=@com.xxx.util.SpringUtils@applicationContext,#context.getEnvironm
 sc -d com.xxx.util.SpringUtils
 ```
 
-![image-20220327234537394](https://gitee.com/EverSpring007/picbed/raw/master/image-20220327234537394.png)
+![image-20220327234537394](Arthas查看SpringBoot配置及ognl ClassNotFoundException处理/image-20220327234537394.png)
 
 获取到classLoaderHash值
 * 2.使用指定的classloader。ognl -c classloader的hash值
