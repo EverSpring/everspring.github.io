@@ -1642,9 +1642,9 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 <p>通过控制台可以看到，设置auto-focus属性为true的规则都触发了。</p>
 <p>注意：同一个组，只要有个设置auto-focus true 其他的设置不设置都无所谓啦。都会起作用的。</p>
 <h3 id="5-8-timer属性"><a href="#5-8-timer属性" class="headerlink" title="5.8 timer属性"></a>5.8 timer属性</h3><p>timer属性可以通过定时器的方式指定规则执行的时间，使用方式有两种：</p>
-<p><strong>方式一</strong>：timer (int: <initial delay> <repeat interval>?)</repeat></initial></p>
+<p><strong>方式一</strong>：timer (int: <initial delay> <repeat interval>?)</p>
 <p>此种方式遵循java.util.Timer对象的使用方式，第一个参数表示几秒后执行，第二个参数表示每隔几秒执行一次，第二个参数为可选。</p>
-<p><strong>方式二</strong>：timer(cron: <cron expression>) </cron></p>
+<p><strong>方式二</strong>：timer(cron: <cron expression>) </p>
 <p>此种方式使用标准的unix cron表达式的使用方式来定义规则执行的时间。</p>
 <p>第一步：创建规则文件&#x2F;resources&#x2F;rules&#x2F;timer.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testtimer
@@ -2705,7 +2705,7 @@ public class DroolsApplication &#123;
 <h2 id="8-WorkBench"><a href="#8-WorkBench" class="headerlink" title="8. WorkBench"></a>8. WorkBench</h2><h3 id="8-1-WorkBench简介"><a href="#8-1-WorkBench简介" class="headerlink" title="8.1 WorkBench简介"></a>8.1 WorkBench简介</h3><p>WorkBench是KIE组件中的元素，也称为KIE-WB，是Drools-WB与JBPM-WB的结合体。它是一个<strong>可视化的规则编辑器</strong>。WorkBench其实就是一个war包，安装到tomcat中就可以运行。使用WorkBench可以在浏览器中创建数据对象、创建规则文件、创建测试场景并将规则部署到maven仓库供其他应用使用。</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://download.jboss.org/drools/release/7.6.0.Final/kie-drools-wb-7.6.0.Final-tomcat8.war">https://download.jboss.org/drools/release/7.6.0.Final/kie-drools-wb-7.6.0.Final-tomcat8.war</a></p>
 <p>注意：下载的war包需要安装到tomcat8中。</p>
-<img src="https://gitee.com/EverSpring007/picbed/raw/master/20160726000447542" alt="img" style="zoom: 50%;">
+<img src="https://gitee.com/EverSpring007/picbed/raw/master/20160726000447542" alt="img" style="zoom: 50%;" />
 
 <h3 id="8-2-安装方式"><a href="#8-2-安装方式" class="headerlink" title="8.2 安装方式"></a>8.2 安装方式</h3><h4 id="8-2-1自己安装"><a href="#8-2-1自己安装" class="headerlink" title="8.2.1自己安装"></a>8.2.1自己安装</h4><p>软件安装时经常会涉及到软件版本兼容性的问题，所以需要明确各个软件的使用版本。</p>
 <p>本课程使用的软件环境如下：</p>
@@ -4933,12 +4933,12 @@ spring:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
                     <a href="/tags/%E8%A7%84%E8%8C%83/">
                         <span class="chip bg-color">规范</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
