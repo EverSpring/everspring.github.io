@@ -315,12 +315,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
                             <a href="/tags/%E8%A7%84%E8%8C%83/">
                                 <span class="chip bg-color">规范</span>
+                            </a>
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
@@ -399,7 +399,7 @@
 <h4 id="二、-OOP规约"><a href="#二、-OOP规约" class="headerlink" title="二、 OOP规约"></a>二、 OOP规约</h4><ol>
 <li>【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</li>
 <li>【强制】所有的覆写方法，必须加@Override 注解<br>说明：getObject()与 get0bject()的问题。一个是字母的 O，一个是数字的 0，加@Override 可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错</li>
-<li>【强制】相同参数类型，相同业务含义，才可以使用 Java 的可变参数，避免使用 Object<br>说明：可变参数必须放置在参数列表的最后（建议开发者尽量不用可变参数编程）<br>正例：public List<User> listUsers(String type, Long… ids) {…}</User></li>
+<li>【强制】相同参数类型，相同业务含义，才可以使用 Java 的可变参数，避免使用 Object<br>说明：可变参数必须放置在参数列表的最后（建议开发者尽量不用可变参数编程）<br>正例：public List<User> listUsers(String type, Long… ids) {…}</li>
 <li>【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals<br>正例：”test”.equals(object)<br>反例：object.equals(“test”);<br>说明：推荐使用 JDK7 引入的工具类 java.util.Objects#equals(Object a, Object b)</li>
 <li>【强制】所有整型包装类对象之间值的比较，全部使用 equals 方法比较</li>
 <li>【强制】任何货币金额，均以最小货币单位且整型类型来进行存</li>
@@ -578,12 +578,12 @@ try &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
                                 <a href="/tags/%E8%A7%84%E8%8C%83/">
                                     <span class="chip bg-color">规范</span>
+                                </a>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
