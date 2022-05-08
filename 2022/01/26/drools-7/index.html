@@ -353,14 +353,14 @@ Drools：https://mvnre">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    27.3k
+                    27.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    123 分
+                    124 分
                 </div>
                 
 
@@ -613,7 +613,7 @@ public Integer determineCreditCardLimit(User user)&#123;
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.12<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>第二步：根据drools要求创建resources/META-INF/kmodule.xml配置文件</p>
+<p>第二步：根据drools要求创建resources&#x2F;META-INF&#x2F;kmodule.xml配置文件</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8" ?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>kmodule</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.drools.org/xsd/kmodule<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token comment">&lt;!--
@@ -667,7 +667,7 @@ public Integer determineCreditCardLimit(User user)&#123;
 
 
 
-<p>第四步：创建规则文件resources/rules/bookDiscount.drl</p>
+<p>第四步：创建规则文件resources&#x2F;rules&#x2F;bookDiscount.drl</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//图书优惠规则</span>
 <span class="token keyword">package</span> <span class="token namespace">book<span class="token punctuation">.</span>discount</span>
 <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>itheima<span class="token punctuation">.</span>drools<span class="token punctuation">.</span>entity<span class="token punctuation">.</span></span><span class="token class-name">Order</span>
@@ -819,7 +819,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <p><strong>RHS</strong>(Right Hand Side)：是规则的后果或行动部分的通用名称。 （右手边）</p>
 <p><strong>end</strong>：关键字，表示一个规则结束。</p>
 <h3 id="4-3-注释"><a href="#4-3-注释" class="headerlink" title="4.3 注释"></a>4.3 注释</h3><p>在drl形式的规则文件中使用注释和Java类中使用注释一致，分为单行注释和多行注释。</p>
-<p>单行注释用”//“进行标记，多行注释以”/<em>“开始，以”</em>/“结束。如下示例：</p>
+<p>单行注释用”&#x2F;&#x2F;“进行标记，多行注释以”&#x2F;<em>“开始，以”</em>&#x2F;“结束。如下示例：</p>
 <pre class="line-numbers language-drl" data-language="drl"><code class="language-drl">&#x2F;&#x2F;规则rule1的注释，这是一个单行注释
 rule &quot;rule1&quot;
     when
@@ -902,19 +902,19 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <td align="left">小于</td>
 </tr>
 <tr>
-<td align="left">&gt;=</td>
+<td align="left">&gt;&#x3D;</td>
 <td align="left">大于等于</td>
 </tr>
 <tr>
-<td align="left">&lt;=</td>
+<td align="left">&lt;&#x3D;</td>
 <td align="left">小于等于</td>
 </tr>
 <tr>
-<td align="left">==</td>
+<td align="left">&#x3D;&#x3D;</td>
 <td align="left">等于</td>
 </tr>
 <tr>
-<td align="left">!=</td>
+<td align="left">!&#x3D;</td>
 <td align="left">不等于</td>
 </tr>
 <tr>
@@ -945,12 +945,12 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <p>前6个比较操作符和Java中的完全相同，下面我们重点学习后6个比较操作符。</p>
 <h4 id="4-5-1-语法"><a href="#4-5-1-语法" class="headerlink" title="4.5.1 语法"></a>4.5.1 语法</h4><ul>
 <li><p><strong>contains | not contains语法结构</strong></p>
-<p>Object(Field[Collection/Array] contains value)</p>
-<p>Object(Field[Collection/Array] not contains value)</p>
+<p>Object(Field[Collection&#x2F;Array] contains value)</p>
+<p>Object(Field[Collection&#x2F;Array] not contains value)</p>
 </li>
 <li><p><strong>memberOf | not memberOf语法结构</strong></p>
-<p>Object(field memberOf value[Collection/Array])</p>
-<p>Object(field not memberOf value[Collection/Array])</p>
+<p>Object(field memberOf value[Collection&#x2F;Array])</p>
+<p>Object(field not memberOf value[Collection&#x2F;Array])</p>
 </li>
 <li><p><strong>matches | not matches语法结构</strong></p>
 <p>Object(field matches “正则表达式”)</p>
@@ -987,7 +987,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>第二步：在/resources/rules下创建规则文件comparisonOperator.drl</p>
+<p>第二步：在&#x2F;resources&#x2F;rules下创建规则文件comparisonOperator.drl</p>
 <pre class="line-numbers language-drl" data-language="drl"><code class="language-drl">package comparisonOperator
 import com.itheima.drools.entity.ComparisonOperatorEntity
 &#x2F;*
@@ -1141,7 +1141,7 @@ rule &quot;true&quot;  &#x2F;&#x2F;可以<span aria-hidden="true" class="line-nu
 
 
 <h4 id="4-8-1-update方法"><a href="#4-8-1-update方法" class="headerlink" title="4.8.1 update方法"></a>4.8.1 update方法</h4><p><strong>update方法的作用是更新工作内存中的数据，并让相关的规则重新匹配。</strong>   （要避免死循环）</p>
-<p>第一步：编写规则文件/resources/rules/student.drl，文件内容如</p>
+<p>第一步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;student.drl，文件内容如</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">student</span>
 <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>itheima<span class="token punctuation">.</span>drools<span class="token punctuation">.</span>entity<span class="token punctuation">.</span></span><span class="token class-name">Student</span>
 
@@ -1478,7 +1478,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <p>通过控制台可以看到，规则文件执行的顺序是按照我们设置的salience值由大到小顺序执行的。</p>
 <p>建议在编写规则时使用salience属性明确指定执行优先级。</p>
 <h3 id="5-4-no-loop属性"><a href="#5-4-no-loop属性" class="headerlink" title="5.4 no-loop属性"></a>5.4 no-loop属性</h3><p>no-loop属性用于防止死循环，当规则通过update之类的函数修改了Fact对象时，可能使当前规则再次被激活从而导致死循环。取值类型为Boolean，默认值为false。测试步骤如下：</p>
-<p>第一步：编写规则文件/resource/rules/noloop.drl</p>
+<p>第一步：编写规则文件&#x2F;resource&#x2F;rules&#x2F;noloop.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testnoloop
 import com.itheima.drools.entity.Student
 &#x2F;*
@@ -1513,7 +1513,7 @@ kieSession.dispose();<span aria-hidden="true" class="line-numbers-rows"><span></
 
 <p>通过控制台可以看到，由于我们没有设置no-loop属性的值，所以发生了死循环。接下来设置no-loop的值为true再次测试则不会发生死循环。</p>
 <h3 id="5-5-activation-group属性"><a href="#5-5-activation-group属性" class="headerlink" title="5.5 activation-group属性"></a>5.5 activation-group属性</h3><p>activation-group属性是指<strong>激活分组</strong>，取值为String类型。具有相同分组名称的规则<strong>只能有一个规则</strong>被触发。</p>
-<p>第一步：编写规则文件/resources/rules/activationgroup.drl</p>
+<p>第一步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;activationgroup.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testactivationgroup
 &#x2F;*
     此规则文件用于测试activation-group属性
@@ -1546,7 +1546,7 @@ kieSession.dispose();<span aria-hidden="true" class="line-numbers-rows"><span></
 
 <p>通过控制台可以发现，上面的两个规则因为属于同一个分组，所以只有一个触发了。同一个分组中的多个规则如果都能够匹配成功，具体哪一个最终能够被触发可以通过salience属性确定。</p>
 <h3 id="5-6-agenda-group属性"><a href="#5-6-agenda-group属性" class="headerlink" title="5.6 agenda-group属性"></a>5.6 agenda-group属性</h3><p>agenda-group属性为<strong>议程分组</strong>，属于另一种可控的规则执行方式。用户可以通过设置agenda-group来控制规则的执行，<strong>只有获取焦点的组</strong>中的规则才会被触发。agenda-group有一个默认值MAIN，通过drools.getRule()打印可以看出来</p>
-<p>第一步：创建规则文件/resources/rules/agendagroup.drl</p>
+<p>第一步：创建规则文件&#x2F;resources&#x2F;rules&#x2F;agendagroup.drl</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">testagendagroup</span>
 <span class="token comment">/*
     此规则文件用于测试agenda-group属性
@@ -1597,7 +1597,7 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 
 <p>通过控制台可以看到，只有获取焦点的分组中的规则才会触发。<strong>与activation-group不同的是，activation-group定义的分组中只能够有一个规则可以被触发，而agenda-group分组中的多个规则都可以被触发</strong>。</p>
 <h3 id="5-7-auto-focus属性"><a href="#5-7-auto-focus属性" class="headerlink" title="5.7 auto-focus属性"></a>5.7 auto-focus属性</h3><p>auto-focus属性为<strong>自动获取焦点</strong>，取值类型为Boolean，默认值为false。一般结合agenda-group属性使用，当一个议程分组未获取焦点时，可以设置auto-focus属性来控制。</p>
-<p>第一步：修改/resources/rules/agendagroup.drl文件内容如下</p>
+<p>第一步：修改&#x2F;resources&#x2F;rules&#x2F;agendagroup.drl文件内容如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">testagendagroup</span>
 
 rule <span class="token string">"rule_agendagroup_1"</span>
@@ -1642,11 +1642,11 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 <p>通过控制台可以看到，设置auto-focus属性为true的规则都触发了。</p>
 <p>注意：同一个组，只要有个设置auto-focus true 其他的设置不设置都无所谓啦。都会起作用的。</p>
 <h3 id="5-8-timer属性"><a href="#5-8-timer属性" class="headerlink" title="5.8 timer属性"></a>5.8 timer属性</h3><p>timer属性可以通过定时器的方式指定规则执行的时间，使用方式有两种：</p>
-<p><strong>方式一</strong>：timer (int: <initial delay> <repeat interval>?)</p>
+<p><strong>方式一</strong>：timer (int: <initial delay> <repeat interval>?)</repeat></initial></p>
 <p>此种方式遵循java.util.Timer对象的使用方式，第一个参数表示几秒后执行，第二个参数表示每隔几秒执行一次，第二个参数为可选。</p>
-<p><strong>方式二</strong>：timer(cron: <cron expression>) </p>
+<p><strong>方式二</strong>：timer(cron: <cron expression>) </cron></p>
 <p>此种方式使用标准的unix cron表达式的使用方式来定义规则执行的时间。</p>
-<p>第一步：创建规则文件/resources/rules/timer.drl</p>
+<p>第一步：创建规则文件&#x2F;resources&#x2F;rules&#x2F;timer.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testtimer
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -1693,7 +1693,7 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 
 <p>注意：单元测试的代码和以前的有所不同，因为我们规则文件中使用到了timer进行定时执行，需要程序能够持续一段时间才能够看到定时器触发的效果。</p>
 <h3 id="5-9-date-effective属性"><a href="#5-9-date-effective属性" class="headerlink" title="5.9 date-effective属性"></a>5.9 date-effective属性</h3><p>date-effective属性<strong>用于指定规则的生效时间</strong>，即只有当前系统时间大于等于设置的时间或者日期规则才有可能触发。默认日期格式为：dd-MMM-yyyy。用户也可以自定义日期格式。</p>
-<p>第一步：编写规则文件/resources/rules/dateeffective.drl</p>
+<p>第一步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;dateeffective.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testdateeffective
 &#x2F;*
     此规则文件用于测试date-effective属性
@@ -1720,7 +1720,7 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 
 <p>注意：上面的代码需要设置日期格式，否则我们在规则文件中写的日期格式和默认的日期格式不匹配程序会报错。</p>
 <h3 id="5-10-date-expires属性"><a href="#5-10-date-expires属性" class="headerlink" title="5.10 date-expires属性"></a>5.10 date-expires属性</h3><p>date-expires属性用于指定规则的<strong>失效时间</strong>，即只有当前系统时间小于设置的时间或者日期规则才有可能触发。默认日期格式为：dd-MMM-yyyy。用户也可以自定义日期格式。<br><strong>注意：</strong>如果有一个drl文件中用了自定义的日期格式，一定要设置全局变量，否则会编译报错</p>
-<p>第一步：编写规则文件/resource/rules/dateexpires.drl</p>
+<p>第一步：编写规则文件&#x2F;resource&#x2F;rules&#x2F;dateexpires.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testdateexpires
 &#x2F;*
     此规则文件用于测试date-expires属性
@@ -1798,7 +1798,7 @@ public class UserService &#123;
 
 
 
-<p>第二步：编写规则文件/resources/rules/global.drl</p>
+<p>第二步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;global.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testglobal
 &#x2F;*
     此规则文件用于测试global全局变量
@@ -1858,7 +1858,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 <p>具体操作步骤：</p>
-<p>第一步：编写规则文件/resources/rules/query.drl</p>
+<p>第一步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;query.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package testquery
 import com.itheima.drools.entity.Student
 &#x2F;*
@@ -1932,7 +1932,7 @@ kieSession.dispose();<span aria-hidden="true" class="line-numbers-rows"><span></
 
 
 <p>具体操作步骤：</p>
-<p>第一步：编写规则文件/resources/rules/function.drl</p>
+<p>第一步：编写规则文件&#x2F;resources&#x2F;rules&#x2F;function.drl</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">testfunction</span>
 <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>itheima<span class="token punctuation">.</span>drools<span class="token punctuation">.</span>entity<span class="token punctuation">.</span></span><span class="token class-name">Student</span>
 <span class="token comment">/*
@@ -1971,7 +1971,7 @@ kieSession<span class="token punctuation">.</span><span class="token function">d
 
 
 <h3 id="6-4-LHS加强"><a href="#6-4-LHS加强" class="headerlink" title="6.4 LHS加强"></a>6.4 LHS加强</h3><p>前面我们已经知道了在规则体中的LHS部分是<strong>介于when和then之间的部分</strong>，主要用于模式匹配，只有匹配结果为true时，才会触发RHS部分的执行。本章节我们会针对LHS部分学习几个新的用法。</p>
-<h4 id="6-4-1-复合值限制in-not-in"><a href="#6-4-1-复合值限制in-not-in" class="headerlink" title="6.4.1 复合值限制in/not in"></a>6.4.1 复合值限制in/not in</h4><p>复合值限制是指超过一种匹配值的限制条件，类似于SQL语句中的in关键字。Drools规则体中的LHS部分可以使用in或者not in进行复合值的匹配。具体语法结构如下：</p>
+<h4 id="6-4-1-复合值限制in-x2F-not-in"><a href="#6-4-1-复合值限制in-x2F-not-in" class="headerlink" title="6.4.1 复合值限制in&#x2F;not in"></a>6.4.1 复合值限制in&#x2F;not in</h4><p>复合值限制是指超过一种匹配值的限制条件，类似于SQL语句中的in关键字。Drools规则体中的LHS部分可以使用in或者not in进行复合值的匹配。具体语法结构如下：</p>
 <p><strong>Object(field in (比较值1,比较值2…))</strong></p>
 <p>举例：</p>
 <pre class="line-numbers language-none"><code class="language-none">$s:Student(name in (&quot;张三&quot;,&quot;李四&quot;,&quot;王五&quot;))
@@ -2096,7 +2096,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 <h3 id="6-6-规则文件编码规范（重要）"><a href="#6-6-规则文件编码规范（重要）" class="headerlink" title="6.6 规则文件编码规范（重要）"></a>6.6 规则文件编码规范（重要）</h3><p>我们在进行drl类型的规则文件编写时尽量遵循如下规范：</p>
 <ul>
-<li>所有的规则文件(.drl)应统一放在一个规定的文件夹中，如：/rules文件夹</li>
+<li>所有的规则文件(.drl)应统一放在一个规定的文件夹中，如：&#x2F;rules文件夹</li>
 <li>书写的每个规则应尽量加上注释。注释要清晰明了，言简意赅</li>
 <li>同一类型的对象尽量放在一个规则文件中，如所有Student类型的对象尽量放在一个规则文件中</li>
 <li>规则结果部分(RHS)尽量不要有条件语句，如if(…)，尽量不要有复杂的逻辑和深层次的嵌套语句</li>
@@ -2177,7 +2177,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
-<p>第二步：创建规则目录/resources/rules，中rules目录中创建规则文件helloworld.drl</p>
+<p>第二步：创建规则目录&#x2F;resources&#x2F;rules，中rules目录中创建规则文件helloworld.drl</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">helloworld</span>
 
 rule <span class="token string">"rule_helloworld"</span>
@@ -2189,7 +2189,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
-<p>第三步：创建Spring配置文件/resources/spring.xml</p>
+<p>第三步：创建Spring配置文件&#x2F;resources&#x2F;spring.xml</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
        <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
@@ -2359,7 +2359,7 @@ public class DroolsSpringTest &#123;
 
 
 
-<p>第三步：创建/resources/springmvc.xml文件</p>
+<p>第三步：创建&#x2F;resources&#x2F;springmvc.xml文件</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
        <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
@@ -2392,7 +2392,7 @@ public class DroolsSpringTest &#123;
 
 
 
-<p>第四步：创建规则文件/resources/rules/helloworld.drl</p>
+<p>第四步：创建规则文件&#x2F;resources&#x2F;rules&#x2F;helloworld.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package helloworld
 
 rule &quot;rule_helloworld&quot;
@@ -2559,7 +2559,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
-<p>第二步：创建/resources/application.yml文件</p>
+<p>第二步：创建&#x2F;resources&#x2F;application.yml文件</p>
 <pre class="line-numbers language-none"><code class="language-none">server:
   port: 8080
 spring:
@@ -2568,7 +2568,7 @@ spring:
 
 
 
-<p>第三步：创建规则文件/resources/rules/helloworld.drl</p>
+<p>第三步：创建规则文件&#x2F;resources&#x2F;rules&#x2F;helloworld.drl</p>
 <pre class="line-numbers language-none"><code class="language-none">package helloworld
 rule &quot;rule_helloworld&quot;
     when
@@ -2705,7 +2705,7 @@ public class DroolsApplication &#123;
 <h2 id="8-WorkBench"><a href="#8-WorkBench" class="headerlink" title="8. WorkBench"></a>8. WorkBench</h2><h3 id="8-1-WorkBench简介"><a href="#8-1-WorkBench简介" class="headerlink" title="8.1 WorkBench简介"></a>8.1 WorkBench简介</h3><p>WorkBench是KIE组件中的元素，也称为KIE-WB，是Drools-WB与JBPM-WB的结合体。它是一个<strong>可视化的规则编辑器</strong>。WorkBench其实就是一个war包，安装到tomcat中就可以运行。使用WorkBench可以在浏览器中创建数据对象、创建规则文件、创建测试场景并将规则部署到maven仓库供其他应用使用。</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://download.jboss.org/drools/release/7.6.0.Final/kie-drools-wb-7.6.0.Final-tomcat8.war">https://download.jboss.org/drools/release/7.6.0.Final/kie-drools-wb-7.6.0.Final-tomcat8.war</a></p>
 <p>注意：下载的war包需要安装到tomcat8中。</p>
-<img src="https://gitee.com/EverSpring007/picbed/raw/master/20160726000447542" alt="img" style="zoom: 50%;" />
+<img src="https://gitee.com/EverSpring007/picbed/raw/master/20160726000447542" alt="img" style="zoom: 50%;">
 
 <h3 id="8-2-安装方式"><a href="#8-2-安装方式" class="headerlink" title="8.2 安装方式"></a>8.2 安装方式</h3><h4 id="8-2-1自己安装"><a href="#8-2-1自己安装" class="headerlink" title="8.2.1自己安装"></a>8.2.1自己安装</h4><p>软件安装时经常会涉及到软件版本兼容性的问题，所以需要明确各个软件的使用版本。</p>
 <p>本课程使用的软件环境如下：</p>
@@ -2725,7 +2725,7 @@ public class DroolsApplication &#123;
 
 
 <p>第三步：将下载的WorkBench的war包改名为kie-drools-wb.war并复制到Tomcat的webapps目录下</p>
-<p>第四步：修改Tomcat下conf/tomcat-users.xml文件</p>
+<p>第四步：修改Tomcat下conf&#x2F;tomcat-users.xml文件</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version='1.0' encoding='utf-8'?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tomcat-users</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://tomcat.apache.org/xml<span class="token punctuation">"</span></span>
               <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
@@ -2746,7 +2746,7 @@ slf4j-api-1.7.25.jar<span aria-hidden="true" class="line-numbers-rows"><span></s
 
 
 
-<p>第六步：修改Tomcat的conf/server.xml文件，添加Valve标签，内容为：</p>
+<p>第六步：修改Tomcat的conf&#x2F;server.xml文件，添加Valve标签，内容为：</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Valve</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.kie.integration.tomcat.JACCValve<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
@@ -2760,10 +2760,59 @@ slf4j-api-1.7.25.jar<span aria-hidden="true" class="line-numbers-rows"><span></s
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull jboss&#x2F;drools-workbench-showcase:7.6.0.Final<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>第二步：启动容器</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ docker run -p 10076:8080 -p 10077:8001 -d --name drools-workbench jboss&#x2F;drools-workbench-showcase:7.6.0.Final<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>10076端口为控制台地址，10077为内置的git仓库端口<br>kie workbench内置了一个git仓库，创建的工程等内容就存储在仓库中的。为了安全，可以启动的时候指定volumn，挂载到host。git默认地址为$WORKING_DIR/.niogit，7.6.0版本指向的是/opt/jboss/wildfly/bin/.niogit。启动可以命令改为</p>
+<p>10076端口为控制台地址，10077为内置的git仓库端口<br>kie workbench内置了一个git仓库，创建的工程等内容就存储在仓库中的。为了安全，可以启动的时候指定volumn，挂载到host。git默认地址为$WORKING_DIR&#x2F;.niogit，7.6.0版本指向的是&#x2F;opt&#x2F;jboss&#x2F;wildfly&#x2F;bin&#x2F;.niogit。启动可以命令改为</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ docker cp 镜像id:&#x2F;opt&#x2F;jboss&#x2F;wildfly&#x2F;bin&#x2F;.niogit &#x2F;home&#x2F;docker&#x2F;drools-workbench
 $ docker run -p 10076:8080 -p 10077:8001 --user&#x3D;$UID:$(id -g $USER) -v &#x2F;home&#x2F;docker&#x2F;drools-workbench&#x2F;.niogit:&#x2F;opt&#x2F;jboss&#x2F;wildfly&#x2F;bin&#x2F;.niogit -d --name drools-workbench jboss&#x2F;drools-workbench-showcase:7.6.0.Final<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><strong>注意</strong>：要指定用户–user=$UID:$(id -g $USER)，否则在启动时出现权限不足的问题<br>第三步：访问<a target="_blank" rel="noopener" href="http://xxx:10076/drools-wb">http://xxx:10076/drools-wb</a><br>默认已有的用户和角色<br>| USER | PASSWORD | ROLE |<br>| —— | —— | ———- |<br>| admin |  admin    |   admin,analyst,kiemgmt |<br>| krisv |       krisv|       admin,analyst|<br>| john |      john |       analyst,Accounting,PM |<br>| sales-rep  |  sales-rep|   analyst,sales |<br>| katy   |      katy |       analyst,HR |<br>| jack  |      jack    |    analyst,IT |<br>第四步：<br>后面创建project,facts,drl文件和8.2一样</p>
+<p><strong>注意</strong>：要指定用户–user&#x3D;$UID:$(id -g $USER)，否则在启动时出现权限不足的问题<br>第三步：访问<a target="_blank" rel="noopener" href="http://xxx:10076/drools-wb">http://xxx:10076/drools-wb</a><br>默认已有的用户和角色</p>
+<table>
+<thead>
+<tr>
+<th>USER</th>
+<th>PASSWORD</th>
+<th>ROLE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>admin</td>
+<td>admin</td>
+<td>admin,analyst,kiemgmt</td>
+</tr>
+<tr>
+<td>krisv</td>
+<td>krisv</td>
+<td>admin,analyst</td>
+</tr>
+<tr>
+<td>john</td>
+<td>john</td>
+<td>analyst,Accounting,PM</td>
+</tr>
+<tr>
+<td>sales-rep</td>
+<td>sales-rep</td>
+<td>analyst,sales</td>
+</tr>
+<tr>
+<td>katy</td>
+<td>katy</td>
+<td>analyst,HR</td>
+</tr>
+<tr>
+<td>jack</td>
+<td>jack</td>
+<td>analyst,IT</td>
+</tr>
+<tr>
+<td>第四步：</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>后面创建project,facts,drl文件和8.2一样</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h3 id="8-3-使用方式"><a href="#8-3-使用方式" class="headerlink" title="8.3 使用方式"></a>8.3 使用方式</h3><h4 id="8-3-1-创建空间、项目"><a href="#8-3-1-创建空间、项目" class="headerlink" title="8.3.1 创建空间、项目"></a>8.3.1 创建空间、项目</h4><p>WorkBench中存在空间和项目的概念。我们在使用WorkBench时首先需要创建空间（Space），在空间中创建项目，在项目中创建数据对象、规则文件等。</p>
 <ul>
 <li><p>创建空间</p>
@@ -2995,7 +3044,7 @@ $ docker run -p 10076:8080 -p 10077:8001 --user&#x3D;$UID:$(id -g $USER) -v &#x2
 </tr>
 <tr>
 <td align="left">2</td>
-<td align="left">设置税率，应纳税所得额&lt;=1500</td>
+<td align="left">设置税率，应纳税所得额&lt;&#x3D;1500</td>
 <td align="left">税率为0.03，速算扣除数为0</td>
 </tr>
 <tr>
@@ -3031,15 +3080,15 @@ $ docker run -p 10076:8080 -p 10077:8001 --user&#x3D;$UID:$(id -g $USER) -v &#x2
 <tr>
 <td align="left">9</td>
 <td align="left">计算税后工资</td>
-<td align="left">扣税额=应纳税所得额*税率-速算扣除数 税后工资=税前工资-扣税额</td>
+<td align="left">扣税额&#x3D;应纳税所得额*税率-速算扣除数 税后工资&#x3D;税前工资-扣税额</td>
 </tr>
 </tbody></table>
 <p>税前工资：10000</p>
-<p>应缴纳所得税：10000-3500 = 6500</p>
+<p>应缴纳所得税：10000-3500 &#x3D; 6500</p>
 <p>税率：0.2</p>
 <p>速算扣除数：555</p>
-<p>扣税额：6500 * 0.2 - 555 = 745</p>
-<p>税后工资：10000 - 745 = 9255</p>
+<p>扣税额：6500 * 0.2 - 555 &#x3D; 745</p>
+<p>税后工资：10000 - 745 &#x3D; 9255</p>
 <h4 id="9-1-3-实现步骤"><a href="#9-1-3-实现步骤" class="headerlink" title="9.1.3 实现步骤"></a>9.1.3 实现步骤</h4><p>本实战案例我们基于Spring Boot整合Drools的方式来实现。</p>
 <p>第一步：创建maven工程calculation并配置pom.xml文件</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
@@ -3152,7 +3201,7 @@ $ docker run -p 10076:8080 -p 10077:8001 --user&#x3D;$UID:$(id -g $USER) -v &#x2
 
 
 
-<p>第二步：创建/resources/application.yml文件</p>
+<p>第二步：创建&#x2F;resources&#x2F;application.yml文件</p>
 <pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
   port: 8080
 spring:
@@ -3300,7 +3349,7 @@ spring:
 
 
 
-<p>第五步：在resources/rules下创建规则文件calculation.drl文件</p>
+<p>第五步：在resources&#x2F;rules下创建规则文件calculation.drl文件</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">calculation</span>
 <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>itheima<span class="token punctuation">.</span>drools<span class="token punctuation">.</span>entity<span class="token punctuation">.</span></span><span class="token class-name">Calculation</span>
 
@@ -3489,7 +3538,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
-<p>第九步：导入静态资源文件到resources/static目录下</p>
+<p>第九步：导入静态资源文件到resources&#x2F;static目录下</p>
 <h3 id="9-2-信用卡申请"><a href="#9-2-信用卡申请" class="headerlink" title="9.2 信用卡申请"></a>9.2 信用卡申请</h3><p>本小节我们需要通过Drools规则引擎来根据规则进行申请人的合法性检查，检查通过后再根据规则确定信用卡额度，最终页面效果如下：</p>
 <p><img src="/media/pictures/Drools.assets/image-20200214202525859.png" alt="image-20200214202525859"></p>
 <h4 id="9-2-1-计算规则"><a href="#9-2-1-计算规则" class="headerlink" title="9.2.1 计算规则"></a>9.2.1 计算规则</h4><p>合法性检查规则如下：</p>
@@ -3668,7 +3717,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
-<p>第二步：创建/resources/application.yml文件</p>
+<p>第二步：创建&#x2F;resources&#x2F;application.yml文件</p>
 <pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
   port: 8080
 spring:
@@ -3875,7 +3924,7 @@ spring:
 
 
 
-<p>第五步：在resources/rules下创建规则文件creditCardApply.drl文件</p>
+<p>第五步：在resources&#x2F;rules下创建规则文件creditCardApply.drl文件</p>
 <pre class="line-numbers language-none"><code class="language-none">package com.itheima.creditCardApply
 import com.itheima.drools.entity.CreditCardApplyInfo
 
@@ -4060,7 +4109,7 @@ public class DroolsApplication &#123;
 
 
 
-<p>第九步：导入静态资源文件到resources/static目录下</p>
+<p>第九步：导入静态资源文件到resources&#x2F;static目录下</p>
 <h3 id="9-3-保险产品准入规则-学到决策表这里-高级部分跳过"><a href="#9-3-保险产品准入规则-学到决策表这里-高级部分跳过" class="headerlink" title="9.3 保险产品准入规则  (学到决策表这里 高级部分跳过)"></a>9.3 保险产品准入规则  (学到决策表这里 高级部分跳过)</h3><h4 id="9-3-1-决策表"><a href="#9-3-1-决策表" class="headerlink" title="9.3.1 决策表"></a>9.3.1 决策表</h4><p>前面的课程中我们编写的规则文件都是drl形式的文件，Drools除了支持drl形式的文件外还支持xls格式的文件（即Excel文件）。这种xls格式的文件通常称为决策表（decision table）。</p>
 <p>决策表（decision table）是一个“精确而紧凑的”表示条件逻辑的方式，非常适合商业级别的规则。决策表与现有的drl文件可以无缝替换。Drools提供了相应的API可以将xls文件编译为drl格式的字符串。</p>
 <p>一个决策表的例子如下：</p>
@@ -4401,7 +4450,7 @@ kieHelper<span class="token punctuation">.</span><span class="token function">ad
 
 
 
-<p>第二步：创建/resources/application.yml文件</p>
+<p>第二步：创建&#x2F;resources&#x2F;application.yml文件</p>
 <pre class="line-numbers language-none"><code class="language-none">server:
   port: 8080
 spring:
