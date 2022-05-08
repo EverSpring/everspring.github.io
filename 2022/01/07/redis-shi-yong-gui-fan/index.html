@@ -356,7 +356,7 @@ Redis使用规范一、key、value规范
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    959
+                    961
                 </div>
                 
 
@@ -422,8 +422,8 @@ Redis使用规范一、key、value规范
 </ol>
 <h4 id="四、集群使用"><a href="#四、集群使用" class="headerlink" title="四、集群使用"></a>四、集群使用</h4><p>Redis集群版本在使用Lua上有特殊要求</p>
 <ol>
-<li>【强制】所有key都应该由 KEYS 数组来传递，redis.call/pcall 里面调用的redis命令，key的位置，必须是KEYS array, 否则直接返回error，”-ERR bad lua script for redis cluster, all the keys that the script uses should be passed using the KEYS array”</li>
-<li>【强制】所有key，必须在1个slot上，否则直接返回error, “-ERR eval/evalsha command keys must in same slot”<br>说明：redis在使用hash算法将键映射到slot时，只会计算{}里面的内容，若{}内的内容相同，则将键映射到同一个slot</li>
+<li>【强制】所有key都应该由 KEYS 数组来传递，redis.call&#x2F;pcall 里面调用的redis命令，key的位置，必须是KEYS array, 否则直接返回error，”-ERR bad lua script for redis cluster, all the keys that the script uses should be passed using the KEYS array”</li>
+<li>【强制】所有key，必须在1个slot上，否则直接返回error, “-ERR eval&#x2F;evalsha command keys must in same slot”<br>说明：redis在使用hash算法将键映射到slot时，只会计算{}里面的内容，若{}内的内容相同，则将键映射到同一个slot</li>
 </ol>
 <h4 id="五、代码使用"><a href="#五、代码使用" class="headerlink" title="五、代码使用"></a>五、代码使用</h4><ol>
 <li>【推荐】value为string时，序列化尽量少采用JDK自带的序列化方式（JdkSerializationRedisSerializer），因为序列化速度慢</li>
