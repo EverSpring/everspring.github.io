@@ -403,7 +403,7 @@
 <p>出现此类问题是由于classloader不是默认加载器导致，见官网issue：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71</a><br><strong>解决方法：</strong> </p>
 <ul>
 <li>1.通过sc -d 查询出当前类的classloader<pre class="line-numbers language-none"><code class="language-none">sc -d com.xxx.util.SpringUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<img src="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理/image-20220327234537394.png" alt="图1" style="zoom: 50%;" /></li>
+<img src="https://raw.githubusercontent.com/EverSpring/picbed/main/202205082343338.png" alt="图1" style="zoom: 50%;" /></li>
 </ul>
 <p>获取到classLoaderHash值</p>
 <ul>
