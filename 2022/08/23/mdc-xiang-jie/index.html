@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="后端JAVA开发规范, EverSpring Blog">
-    <meta name="description" content="根据原公司规范、阿里巴巴JAVA规范形成
-后端JAVA开发规范JAVA开发规范一节借鉴了《阿里巴巴JAVA开发手册》，根据公司情况做了一些删减、补充，建议大家在网上下载《阿里巴巴JAVA开发手册》当前最新版本为嵩山版（截止2022.1.18">
+    <meta name="keywords" content="MDC在多线程中的使用, EverSpring Blog">
+    <meta name="description" content="一、了解MDCMDC（Mapped Diagnostic Context，映射调试上下文）是 slf4j提供的一种轻量级的日志跟踪工具。Log4j、Logback或者Log4j2等日志中最常见区分同一个请求的方式是通过线程名，而如果请求量大">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>后端JAVA开发规范 | EverSpring Blog</title>
+    <title>MDC在多线程中的使用 | EverSpring Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -288,12 +287,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">后端JAVA开发规范</h1>
+                    <h1 class="description center-align post-title">MDC在多线程中的使用</h1>
                 </div>
             </div>
         </div>
@@ -315,12 +314,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%A7%84%E8%8C%83/">
-                                <span class="chip bg-color">规范</span>
+                            <a href="/tags/MDC/">
+                                <span class="chip bg-color">MDC</span>
                             </a>
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%97%A5%E5%BF%97/">
+                                <span class="chip bg-color">多线程日志</span>
                             </a>
                         
                     </div>
@@ -344,7 +343,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-14
+                    2022-08-23
                 </div>
                 
 
@@ -353,14 +352,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.9k
+                    950
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    4 分
                 </div>
                 
 
@@ -383,136 +382,131 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>根据原公司规范、阿里巴巴JAVA规范形成</p>
-<h2 id="后端JAVA开发规范"><a href="#后端JAVA开发规范" class="headerlink" title="后端JAVA开发规范"></a>后端JAVA开发规范</h2><p>JAVA开发规范一节借鉴了《阿里巴巴JAVA开发手册》，根据公司情况做了一些删减、补充，建议大家在网上下载《阿里巴巴JAVA开发手册》当前最新版本为嵩山版（截止2022.1.18）仔细阅读，官方地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/p3c">https://github.com/alibaba/p3c</a><br>建议大家安装代码检查工具，比如：Alibaba Java Coding Guidelines、SpotBugs、SonarLint等，开发完成后做代码扫描</p>
-<h4 id="一、-命名"><a href="#一、-命名" class="headerlink" title="一、 命名"></a>一、 命名</h4><ol>
-<li>【强制】类名使用 UpperCamelCase 风格，但以下情形例外：DO &#x2F; BO &#x2F; DTO &#x2F; VO &#x2F; AO &#x2F; PO &#x2F; UID 等<br>正例：ForceCode &#x2F; UserDO &#x2F; HtmlDTO &#x2F; XmlService &#x2F; TcpUdpDeal &#x2F; TaPromotion<br>反例：forcecode &#x2F; UserDo &#x2F; HTMLDto &#x2F; XMLService &#x2F; TCPUDPDeal &#x2F; TAPromotion</li>
-<li>【强制】方法名、参数名、成员变量、局部变量都统一使用 lowerCamelCase 风格。<br>正例： localValue &#x2F; getHttpMessage() &#x2F; inputUserId</li>
-<li>【强制】常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。<br>正例：MAX_STOCK_COUNT &#x2F; CACHE_EXPIRED_TIME<br>反例：MAX_COUNT &#x2F; EXPIRED_TIME</li>
-<li>【强制】抽象类命名使用 Abstract 或 Base 开头；异常类命名使用 Exception 结尾；测试类命名以它要测试的类的名称开始，以 Test 结尾</li>
-<li>【强制】类型与中括号紧挨相连来表示数组。<br>正例：定义整形数组 int[] arrayDemo。<br>反例：在 main 参数中，使用 String args[]来定义</li>
-<li>【强制】POJO 类中的任何布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误</li>
-<li>【强制】包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式<br>正例：应用工具类包名为 com.alibaba.ei.kunlun.aap.util、类名为 MessageUtils（此规则参考 spring 的框架结构）</li>
-<li>【强制】避免在子父类的成员变量之间、或者不同代码块的局部变量之间采用完全相同的命名，使可理解性降低。说明：子类、父类成员变量名相同，即使是 public 类型的变量也能够通过编译，另外，局部变量在同一方法内的不同代码块中同名也是合法的，这些情况都要避免。对于非 setter&#x2F;getter 的参数名称也要避免与成员变量名称相同。</li>
-<li>【参考】枚举类名带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开<br>说明：枚举其实就是特殊的常量类，且构造方法被默认强制是私有<br>正例：枚举名字为 ProcessStatusEnum 的成员名称：SUCCESS &#x2F; UNKNOWN_REASON</li>
+                <h1 id="一、了解MDC"><a href="#一、了解MDC" class="headerlink" title="一、了解MDC"></a>一、了解MDC</h1><p>MDC（Mapped Diagnostic Context，映射调试上下文）是 slf4j提供的一种轻量级的日志跟踪工具。Log4j、Logback或者Log4j2等日志中最常见区分同一个请求的方式是通过线程名，而如果<br>请求量大，线程名在相近的时间内会有很多重复的而无法分辨，因此引出了trace-id，即在接收到的时候生成唯一的请求id，在整个执行链路中带上此唯一id.<br>MDC.java本身不提供传递traceId的能力，真正提供能力的是<code>MDCAdapter</code>接口的实现。比如Log4j的是<code>Log4jMDCAdapter</code>，Logback的是<code>LogbackMDCAdapter</code>。</p>
+<h1 id="二、MDC普通使用"><a href="#二、MDC普通使用" class="headerlink" title="二、MDC普通使用"></a>二、MDC普通使用</h1><ol>
+<li>MDC.put(“trace-id”, traceId); &#x2F;&#x2F; 添加traceId</li>
+<li>MDC.remove(“trace-id”); &#x2F;&#x2F; 移除traceId</li>
+<li>在日志配置文件中<code>&lt;pattern&gt;</code>节点中以<code>%X&#123;trace-id&#125;</code>取出，比如：<code>&lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level [uniqid-%X&#123;trace-id&#125;] %logger&#123;50&#125;-%line - %m%n&lt;/pattern&gt;</code><br>以上方式，只能在做put操作的当前线程中获取到值。那是因为MDC的实现原理主要就是ThreadLocal，ThreadLocal只对当前线程有效。</li>
 </ol>
-<h4 id="二、-OOP规约"><a href="#二、-OOP规约" class="headerlink" title="二、 OOP规约"></a>二、 OOP规约</h4><ol>
-<li>【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</li>
-<li>【强制】所有的覆写方法，必须加@Override 注解<br>说明：getObject()与 get0bject()的问题。一个是字母的 O，一个是数字的 0，加@Override 可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错</li>
-<li>【强制】相同参数类型，相同业务含义，才可以使用 Java 的可变参数，避免使用 Object<br>说明：可变参数必须放置在参数列表的最后（建议开发者尽量不用可变参数编程）<br>正例：public List<User> listUsers(String type, Long… ids) {…}</li>
-<li>【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals<br>正例：”test”.equals(object)<br>反例：object.equals(“test”);<br>说明：推荐使用 JDK7 引入的工具类 java.util.Objects#equals(Object a, Object b)</li>
-<li>【强制】所有整型包装类对象之间值的比较，全部使用 equals 方法比较</li>
-<li>【强制】任何货币金额，均以最小货币单位且整型类型来进行存</li>
-<li>【强制】浮点数之间的等值判断，基本数据类型不能用&#x3D;&#x3D;来比较，包装数据类型不能用 equals来判断</li>
-<li>【强制】浮点数之间的等值判断，基本数据类型不能用&#x3D;&#x3D;来比较，包装数据类型不能用 equals来判断<br>说明：equals()方法会比较值和精度（1.0 与 1.00 返回结果为 false），而 compareTo()则会忽略精度</li>
-<li>【强制】定义数据对象 DO 类时，属性类型要与数据库字段类型相匹配<br>正例：数据库字段的 bigint 必须与类属性的 Long 类型相对应<br>反例：某个案例的数据库表 id 字段定义类型 bigint unsigned，实际类对象属性为 Integer，随着 id 越来越大，超过 Integer 的表示范围而溢出成为负数</li>
-<li>【强制】禁止使用构造方法 BigDecimal(double)的方式把 double 值转化为 BigDecimal 对象<br>说明：BigDecimal(double)存在精度损失风险，在精确计算或值比较的场景中可能会导致业务逻辑异常。<br>如：BigDecimal g &#x3D; new BigDecimal(0.1F); 实际的存储值为：0.10000000149<br>正例：优先推荐入参为 String 的构造方法，或使用 BigDecimal 的 valueOf 方法，此方法内部其实执行了Double 的 toString，而 Double 的 toString 按 double 的实际能表达的精度对尾数进行了截断。<pre class="line-numbers language-none"><code class="language-none">BigDecimal recommend1 &#x3D; new BigDecimal(&quot;0.1&quot;);
-BigDecimal recommend2 &#x3D; BigDecimal.valueOf(0.1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>关于基本数据类型与包装数据类型的使用标准如下<ul>
-<li>【强制】所有的 POJO 类属性必须使用包装数据类型</li>
-<li>【强制】RPC 方法的返回值和参数必须使用包装数据类型<br>正例：数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险</li>
+<h1 id="三、多线程中的MDC"><a href="#三、多线程中的MDC" class="headerlink" title="三、多线程中的MDC"></a>三、多线程中的MDC</h1><p>要破除ThreadLocal只对当前线程有线的方法有两种：<br>一种是JDK自带的、ThreadLocal的扩展类<code>InheritableThreadLocal</code>，子线程会拷贝父线程中的变量值<br>一种是引入alibaba<code>transmittable-thread-local</code>包的<code>TransmittableThreadLocal</code>实现  </p>
+<blockquote>
+<p>据我所知，只有子线程获取父线程，不能父线程获取子线程的变量，如果有知道父获取子的方法，麻烦说一下，谢谢</p>
+</blockquote>
+<p>Sl4j本身的提供的<code>BasicMDCAdapter</code>就是基于<code>InheritableThreadLocal</code>实现了线程间传递，但log4j、logback这两个实际的日志实现没有提供，log4j2提供了但默认关闭。</p>
+<ol>
+<li>log4j2主要是根据<code>isThreadContextMapInheritable</code>变量控制的，有两种方法：<ul>
+<li>log4j2.component.properties文件中配置</li>
+<li>类型模块中定义,<code>System.setProperty(&quot;log4j2.isThreadContextMapInherimeble&quot;, &quot;true&quot;);</code></li>
 </ul>
 </li>
-<li>【强制】序列化类新增属性时，请不要修改 serialVersionUID 字段，避免反序列失败；如果完全不兼容升级，避免反序列化混乱，那么请修改 serialVersionUID 值。<br>说明：注意 serialVersionUID 不一致会抛出序列化运行时异常</li>
-<li>【强制】构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中</li>
-<li>【强制】禁止在 POJO 类中，同时存在对应属性 xxx 的 isXxx()和 getXxx()方法<br>说明：框架在调用属性 xxx 的提取方法时，并不能确定哪个方法一定是被优先调用到的</li>
-<li>【推荐】使用索引访问用 String 的 split 方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛 IndexOutOfBoundsException 的风险</li>
-<li>【推荐】慎用 Object 的 clone 方法来拷贝对象<br>说明：对象 clone 方法默认是浅拷贝，若想实现深拷贝，需覆写 clone 方法实现域对象的深度遍历式拷贝</li>
+<li>lob4j和logback需要自己手动实现，主要有两种方法，一是<code>手动在线程中的处理</code>，一种是重写<code>LogbackMDCAdapter</code>。本文以在线程池中创建为例<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span>MDC<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">CollectionUtils</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Map</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">Callable</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @desc: 定义MDC工具类，支持Runnable和Callable两种，目的就是为了把父线程的traceId设置给子线程
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MdcUtil</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Callable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">wrap</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Callable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> callable<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                MDC<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                MDC<span class="token punctuation">.</span><span class="token function">setContextMap</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> callable<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 清除子线程的，避免内存溢出，就和ThreadLocal.remove()一个原因</span>
+                MDC<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Runnable</span> <span class="token function">wrap</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Runnable</span> runnable<span class="token punctuation">,</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                MDC<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                MDC<span class="token punctuation">.</span><span class="token function">setContextMap</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                runnable<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+                MDC<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">Callable</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">Future</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @desc: 把当前的traceId透传到子线程特意加的实现。重点就是 MDC.getCopyOfContextMap()，此方法获取当前线程（父线程）的traceId
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadPoolMdcExecutor</span> <span class="token keyword">extends</span> <span class="token class-name">ThreadPoolTaskExecutor</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> task<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">MdcUtil</span><span class="token punctuation">.</span><span class="token function">wrap</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> MDC<span class="token punctuation">.</span><span class="token function">getCopyOfContextMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> <span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> task<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">MdcUtil</span><span class="token punctuation">.</span><span class="token function">wrap</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> MDC<span class="token punctuation">.</span><span class="token function">getCopyOfContextMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">Future</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">Callable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> task<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">MdcUtil</span><span class="token punctuation">.</span><span class="token function">wrap</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> MDC<span class="token punctuation">.</span><span class="token function">getCopyOfContextMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
-<h4 id="三、日期时间"><a href="#三、日期时间" class="headerlink" title="三、日期时间"></a>三、日期时间</h4><ol>
-<li>【强制】日期格式化时，传入 pattern 中表示年份统一使用小写的 y<br>说明：日期格式化时，yyyy 表示当天所在的年，而大写的 YYYY 代表是 week in which year（JDK7 之后 引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的 YYYY 就是下一年</li>
-<li>【强制】获取当前毫秒数：System.currentTimeMillis(); 而不是 new Date().getTime()</li>
-<li>【强制】不允许在程序任何地方中使用：1）java.sql.Date。 2）java.sql.Time；3）java.sql.Timestamp<br>说明：第 1 个不记录时间，getHours()抛出异常；第 2 个不记录日期，getYear()抛出异常；第 3 个在构造方法 super((time&#x2F;1000)*1000)，在 Timestamp 属性 fastTime 和 nanos 分别存储秒和纳秒信息</li>
-<li>【强制】不要在程序中写死一年为 365 天，避免在公历闰年时出现日期转换错误或程序逻辑<br>错误</li>
-</ol>
-<h4 id="四、集合处理"><a href="#四、集合处理" class="headerlink" title="四、集合处理"></a>四、集合处理</h4><ol>
-<li>【强制】关于 hashCode 和 equals 的处理，遵循如下规则：<br>1） 只要覆写 equals，就必须覆写 hashCode。<br>2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须覆写这两种方法<br>3） 如果自定义对象作为 Map 的键，那么必须覆写 hashCode 和 equals</li>
-<li>【强制】判断所有集合内部的元素是否为空，使用 isEmpty()方法，而不是 size()&#x3D;&#x3D;0 的方式</li>
-<li>【强制】在使用 java.util.stream.Collectors 类的 toMap()方法转为 Map 集合时，一定要使用含有参数类型为 BinaryOperator，参数名为 mergeFunction 的方法，否则当出现相同 key值时会抛出 IllegalStateException 异常。<br>说明：JDK1.8后的版本</li>
-<li>【强制】在使用 java.util.stream.Collectors 类的 toMap()方法转为 Map 集合时，一定要注意当 value 为 null 时会抛 NPE 异常</li>
-<li>【强制】ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常：java.util.RandomAccessSubList cannot be cast to java.util.ArrayList。说明：subList()返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 本身，而是 ArrayList 的一个视图，对于 SubList 的所有操作最终会反映到原列表上</li>
-<li>【强制】使用 Map 的方法 keySet()&#x2F;values()&#x2F;entrySet()返回集合对象时，不可以对其进行添加元素操作，否则会抛出 UnsupportedOperationException 异常</li>
-<li>【强制】Collections 类返回的对象，如：emptyList()&#x2F;singletonList()等都是 immutable list，不可对其进行添加或者删除元素的操作</li>
-<li>【强制】在 subList 场景中，高度注意对父集合元素的增加或删除，均会导致子列表的遍历、<br>增加、删除产生 ConcurrentModificationException 异常</li>
-<li>【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一致、长度为 0 的空数组<br>反例：直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[]类，若强转其它类型数组将出现ClassCastException 错误</li>
-<li>【强制】在使用 Collection 接口任何实现类的 addAll()方法时，都要对输入的集合参数进行NPE 判断<br>说明：在 ArrayList#addAll 方法的第一行代码即 Object[] a &#x3D; c.toArray(); 其中 c 为输入集合参数，如果为 null，则直接抛出异常</li>
-<li>【强制】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法， 它的 add&#x2F;remove&#x2F;clear 方法会抛出 UnsupportedOperationException 异常</li>
-<li>【强制】泛型通配符&lt;? extends T&gt;来接收返回的数据，此写法的泛型集合不能使用 add 方法， 而&lt;? super T&gt;不能使用 get 方法，两者在接口调用赋值的场景中容易出错<br>说明：扩展说一下 PECS(Producer Extends Consumer Super)原则：第一、频繁往外读取内容的，适合用&lt;? extends T&gt;。第二、经常往里插入的，适合用&lt;? super T&gt;</li>
-<li>【强制】在无泛型限制定义的集合赋值给泛型限制的集合时，在使用集合元素时，需要进行instanceof 判断，避免抛出 ClassCastException 异常</li>
-<li>【强制】不要在 foreach 循环里进行元素的 remove&#x2F;add 操作。remove 元素请使用 Iterator方式，如果并发操作，需要对 Iterator 对象加锁</li>
-</ol>
-<h4 id="五、并发处理"><a href="#五、并发处理" class="headerlink" title="五、并发处理"></a>五、并发处理</h4><ol>
-<li>【强制】获取单例对象需要保证线程安全，其中的方法也要保证线程安全</li>
-<li>【强制】创建线程或线程池时请指定有意义的线程名称，方便出错时回溯</li>
-<li>【强制】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程<br>说明：线程池的好处是减少在创建和销毁线程上所消耗的时间以及系统资源的开销，解决资源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或者“过度切换”的问题</li>
-<li>【强制】SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static必须加锁，或者使用 DateUtils 工具类<br>正例：注意线程安全，使用 DateUtils。亦推荐如下处理<pre class="line-numbers language-none"><code class="language-none">private static final ThreadLocal&lt;DateFormat&gt; df &#x3D; new ThreadLocal&lt;DateFormat&gt;() &#123;
- @Override
- protected DateFormat initialValue() &#123;
- 	return new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
- &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-说明：如果是 JDK8 的应用，可以使用 Instant 代替 Date，LocalDateTime 代替 Calendar， DateTimeFormatter 代替 SimpleDateFormat，官方给出的解释：simple beautiful strong immutable thread-safe</li>
-<li>【强制】必须回收自定义的 ThreadLocal 变量，尤其在线程池场景下，线程经常会被复用， 如果不清理自定义的 ThreadLocal 变量，可能会影响后续业务逻辑和造成内存泄露等问题。 尽量在代理中使用 try-finally 块进行回收<br>正例：<pre class="line-numbers language-none"><code class="language-none">objectThreadLocal.set(userInfo);
-try &#123;
- &#x2F;&#x2F; ...
-&#125; finally &#123;
- objectThreadLocal.remove();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能 锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁<br>说明：尽可能使加锁的代码块工作量尽可能的小，避免在锁代码块中调用 RPC 方法</li>
-<li>【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁<br>说明：线程一需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序也必须是 A、B、C，否则可能出现死锁</li>
-<li>【强制】在使用阻塞等待获取锁的方式中，必须在 try 代码块之外，并且在加锁方法与 try 代 码块之间没有任何可能抛出异常的方法调用，避免加锁成功后，在 finally 中无法解锁。<br>说明一：如果在 lock 方法与 try 代码块之间的方法调用抛出异常，那么无法解锁，造成其它线程无法成功获取锁。<br>说明二：如果 lock 方法在 try 代码块之内，可能由于其它方法抛出异常，导致在 finally 代码块中，unlock对未加锁的对象解锁，它会调用 AQS 的 tryRelease 方法（取决于具体实现类），抛出<br>IllegalMonitorStateException 异常。<br>说明三：在 Lock 对象的 lock 方法实现中可能抛出 unchecked 异常，产生的后果与说明二相同<br>正例：<pre class="line-numbers language-none"><code class="language-none">Lock lock &#x3D; new XxxLock();
-&#x2F;&#x2F; ...
-lock.lock();
-try &#123;
- doSomething();
- doOthers();
-&#125; finally &#123;
- lock.unlock();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-反例：<pre class="line-numbers language-none"><code class="language-none">Lock lock &#x3D; new XxxLock();
-try &#123;
- &#x2F;&#x2F; 如果此处抛出异常，则直接执行 finally 代码块
- doSomething();
- &#x2F;&#x2F; 无论加锁是否成功，finally 代码块都会执行
- lock.lock();
- doOthers();
-&#125; finally &#123;
- lock.unlock();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>【强制】在使用尝试机制来获取锁的方式中，进入业务代码块之前，必须先判断当前线程是否持有锁。锁的释放规则与锁的阻塞等待方式相同<br>说明：Lock 对象的 unlock 方法在执行时，它会调用 AQS 的 tryRelease 方法（取决于具体实现类），如果 当前线程不持有锁，则抛出 IllegalMonitorStateException 异常<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Lock</span> lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XxxLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// ...</span>
-<span class="token keyword">boolean</span> isLocked <span class="token operator">=</span> lock<span class="token punctuation">.</span><span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>isLocked<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
- <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token function">doOthers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
- lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>【强制】并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加 锁，要么在数据库层使用乐观锁，使用 version 作为更新依据。<br>说明：如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于3 次。</li>
-<li>【推荐】使用 CountDownLatch 进行异步转同步操作，每个线程退出前必须调用 countDown 方 法，线程执行代码注意 catch 异常，确保 countDown 方法被执行到，避免主线程无法执行至 await 方法，直到超时才返回结果。<br>说明：注意，子线程抛出异常堆栈，不能在主线程 try-catch 到</li>
-<li>【推荐】避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一 seed导致的性能下降<br>说明：Random 实例包括 java.util.Random 的实例或者 Math.random()的方式。<br>正例：在 JDK7 之后，可以直接使用 API ThreadLocalRandom，而在 JDK7 之前，需要编码保证每个线程持有一个单独的 Random 实例</li>
-<li>【参考】ThreadLocal 对象使用 static 修饰，ThreadLocal 无法解决共享对象的更新问题</li>
-</ol>
-<h4 id="六、前、后端公约"><a href="#六、前、后端公约" class="headerlink" title="六、前、后端公约"></a>六、前、后端公约</h4><ol>
-<li>【强制】前后端交互的 API，需要明确协议、域名、路径、请求方法、请求内容、状态码、响应体</li>
-<li>【强制】前后端数据<strong>列表</strong>相关的接口返回，如果为空，则返回空数组[]或空集合{}<br>说明：此条约定有利于数据层面上的协作更加高效，减少前端很多琐碎的 null 判断</li>
-<li>【强制】在前后端交互的 JSON 格式数据中，所有的 key 必须为小写字母开始的lowerCamelCase 风格，符合英文表达习惯，且表意完整</li>
-<li>【强制】对于需要使用超大整数的场景，服务端一律使用 String 字符串类型返回，禁止使用Long 类型</li>
-<li>【强制】HTTP 请求通过 URL 传递参数时，不能超过 2048 字节</li>
-<li>【强制】HTTP 请求通过 body 传递内容时，必须控制长度，超出最大长度后，后端解析会出错<br>说明：nginx 默认限制是 1MB，tomcat 默认限制为 2MB，当确实有业务需要传较大内容时，可以通过调大服务器端的限制。<br>Nginx调整参数：client_max_body_size<br>tomcat调整参数：server.xml中的节点添加maxPostSize</li>
-<li>【强制】在翻页场景中，用户输入参数的小于 1，则前端返回第一页参数给后端；后端发现用户输入的参数大于总页数，直接返回最后一页</li>
-<li>【强制】服务器内部重定向必须使用 forward；外部重定向地址必须使用 URL 统一代理模块生成，否则会因线上采用 HTTPS 协议而导致浏览器提示“不安全”，并且还会带来 URL 维护不一致的问题</li>
-<li>【推荐】前后端的时间格式统一为”yyyy-MM-dd HH:mm:ss”，统一为 GMT</li>
-<li>【参考】在接口路径中不要加入版本号，版本控制在 HTTP 头信息中体现，有利于向前兼容</li>
-</ol>
-<h4 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h4><ol>
-<li>【强制】finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch<br>说明：如果 JDK7 及以上，可以使用 try-with-resources 方式</li>
-<li>【强制】不要在 finally 块中使用 return<br>说明：try 块中的 return 语句执行成功后，并不马上返回，而是继续执行 finally 块中的语句，如果此处存在 return 语句，则在此直接返回，无情丢弃掉 try 块中的返回点</li>
-<li>【强制】应用中不可直接使用日志系统（Log4j、Logback）中的 API，而应依赖使用日志框架（SLF4J、JCL–Jakarta Commons Logging）中的 API，使用门面模式的日志框架，有利于维护和各个类的日志处理方式统一</li>
-<li>【强制】在日志输出时，字符串变量之间的拼接使用占位符的方式<br>说明：因为 String 字符串的拼接会使用 StringBuilder 的 append()方式，有一定的性能损耗。使用占位符仅是替换动作，可以有效提升性能。<br>正例：logger.debug(“Processing trade with id: {} and symbol: {}”, id, symbol);</li>
-<li>【强制】生产环境禁止直接使用 System.out 或 System.err 输出日志或使用e.printStackTrace()打印异常堆栈</li>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">cn<span class="token punctuation">.</span>hutool<span class="token punctuation">.</span>core<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ReflectUtil</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>ccblife<span class="token punctuation">.</span>hiim<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ThreadUtils</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>commons<span class="token punctuation">.</span>lang3<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">BasicThreadFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>autoconfigure<span class="token punctuation">.</span>condition<span class="token punctuation">.</span></span><span class="token class-name">ConditionalOnProperty</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Bean</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Configuration</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>scheduling<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ThreadPoolTaskExecutor</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Resource</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">RejectedExecutionHandler</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ScheduledExecutorService</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">ScheduledThreadPoolExecutor</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 线程池配置。重点就是把ThreadPoolTaskExecutor换成ThreadPoolMdcExecutor
+ **/</span>
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadPoolConfig</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> <span class="token class-name">ThreadPoolProperties</span> threadPoolProperties<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * 业务用到的线程池
+     * @return
+     */</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"threadPoolTaskExecutor"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">ThreadPoolTaskExecutor</span> <span class="token function">threadPoolTaskExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ThreadPoolTaskExecutor</span> executor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolMdcExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">setMaxPoolSize</span><span class="token punctuation">(</span>threadPoolProperties<span class="token punctuation">.</span><span class="token function">getMaxPoolSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">setCorePoolSize</span><span class="token punctuation">(</span>threadPoolProperties<span class="token punctuation">.</span><span class="token function">getCorePoolSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">setQueueCapacity</span><span class="token punctuation">(</span>threadPoolProperties<span class="token punctuation">.</span><span class="token function">getQueueCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">setKeepAliveSeconds</span><span class="token punctuation">(</span>threadPoolProperties<span class="token punctuation">.</span><span class="token function">getKeepAliveSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">RejectedExecutionHandler</span> handler <span class="token operator">=</span> <span class="token class-name">ReflectUtil</span><span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span>threadPoolProperties<span class="token punctuation">.</span><span class="token function">getRejectedExecutionHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClazz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">setRejectedExecutionHandler</span><span class="token punctuation">(</span>handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> executor<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>推荐文章：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yangyongjie/p/12523567.html">https://www.cnblogs.com/yangyongjie/p/12523567.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zlt2000/article/details/99641821">https://blog.csdn.net/zlt2000/article/details/99641821</a></li>
 </ol>
 
                 
@@ -540,7 +534,7 @@ try &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://everspring.github.io/2022/08/14/hou-duan-java-kai-fa-gui-fan/">https://everspring.github.io/2022/08/14/hou-duan-java-kai-fa-gui-fan/</a>
+                    <a href="https://everspring.github.io/2022/08/23/mdc-xiang-jie/">https://everspring.github.io/2022/08/23/mdc-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -578,12 +572,12 @@ try &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%A7%84%E8%8C%83/">
-                                    <span class="chip bg-color">规范</span>
+                                <a href="/tags/MDC/">
+                                    <span class="chip bg-color">MDC</span>
                                 </a>
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%97%A5%E5%BF%97/">
+                                    <span class="chip bg-color">多线程日志</span>
                                 </a>
                             
                         </div>
@@ -757,9 +751,10 @@ try &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/08/23/mdc-xiang-jie/">
                     <div class="card-image">
@@ -777,9 +772,9 @@ try &#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -792,6 +787,7 @@ try &#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -814,13 +810,13 @@ try &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/30/kali-xi-lie-1-kali-an-zhuang/">
+                <a href="/2022/08/14/hou-duan-java-kai-fa-gui-fan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="kali系列-一.kali U盘安装">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="后端JAVA开发规范">
                         
-                        <span class="card-title">kali系列-一.kali U盘安装</span>
+                        <span class="card-title">后端JAVA开发规范</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -831,14 +827,14 @@ try &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/kali/" class="post-category">
-                                    kali
+                            <a href="/categories/JAVA/" class="post-category">
+                                    JAVA
                                 </a>
                             
                             
@@ -848,12 +844,12 @@ try &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">渗透测试</span>
+                    <a href="/tags/%E8%A7%84%E8%8C%83/">
+                        <span class="chip bg-color">规范</span>
                     </a>
                     
-                    <a href="/tags/kali-U%E7%9B%98%E5%AE%89%E8%A3%85/">
-                        <span class="chip bg-color">kali U盘安装</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
