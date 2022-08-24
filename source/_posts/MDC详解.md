@@ -101,9 +101,6 @@ public class ThreadPoolMdcExecutor extends ThreadPoolTaskExecutor {
 ```
 
 ```java
-import cn.hutool.core.util.ReflectUtil;
-import com.ccblife.hiim.util.ThreadUtils;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
