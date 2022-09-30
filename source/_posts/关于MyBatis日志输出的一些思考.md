@@ -290,3 +290,18 @@ mybatis-plus:
         <appender-ref ref="PBC_LOG"/>
     </logger>
 ```
+**注意：**如果用了代码方式匹配logger name，日志可能打印出来没有类、方法信息，打印出的是`user_module_logger`，因为很多时候encoder配置的是%logger，而%logger会被logger name替换。如要打印出类、方法信息，%logger应改为%C.%M，%C代表class，%M代表方法，具体的变量可见`ch.qos.logback.classic.PatternLayout`类
+
+```java
+DEFAULT_CONVERTER_MAP.put("lo", LoggerConverter.class.getName());
+DEFAULT_CONVERTER_MAP.put("logger", LoggerConverter.class.getName());
+DEFAULT_CONVERTER_MAP.put("c", LoggerConverter.class.getName());
+
+DEFAULT_CONVERTER_MAP.put("C", ClassOfCallerConverter.class.getName());
+DEFAULT_CONVERTER_MAP.put("class", ClassOfCallerConverter.class.getName());
+CONVERTER_CLASS_TO_KEY_MAP.put(ClassOfCallerConverter.class.getName(), "class");
+
+DEFAULT_CONVERTER_MAP.put("M", MethodOfCallerConverter.class.getName());
+DEFAULT_CONVERTER_MAP.put("method", MethodOfCallerConverter.class.getName());
+CONVERTER_CLASS_TO_KEY_MAP.put(MethodOfCallerConverter.class.getName(), "method");
+```
