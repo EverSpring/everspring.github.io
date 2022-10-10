@@ -173,12 +173,12 @@ Logback：1.2.9（SpringBoot自动依赖）
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
     <!-- 打印sql，但不打印事务等 com.bank.mapper为我自己mapper存放的包名-->
-    <logger name="com.bank.mapper" level="DEBUG">
+    <logger name="com.bank.mapper" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEBUG_FILE"/>
     </logger>
     <!-- 打印事务、mapper注册等信息，打印到控制台、记录到debug_file -->
-    <logger name="org.mybatis.spring.SqlSessionUtils" level="DEBUG">
+    <logger name="org.mybatis.spring.SqlSessionUtils" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEBUG_FILE"/>
     </logger>
