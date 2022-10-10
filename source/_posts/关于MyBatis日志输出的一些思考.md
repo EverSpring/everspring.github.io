@@ -259,7 +259,7 @@ mybatis-plus:
 * b) 如果不能按照package划分，就需要通过代码中`Logger LOGGER = LoggerFactory.getLogger("logger name的值");`来指定（如用了Lombok，可用`@Slf4j(topic="logger name的值")`）
 ```xml
     <!-- 时间滚动输出 level为 pbc模块INFO 日志 -->
-    <appender name="PBC_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="user_module_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
         <file>${logger.path}/pbc_log_info.log</file>
         <!--日志文件输出格式-->
@@ -286,8 +286,8 @@ mybatis-plus:
     </appender>
 
     <!-- 业务模块 -->
-    <logger name="pbc_module" level="info" additivity="false">
-        <appender-ref ref="PBC_LOG"/>
+    <logger name="user_module_logger" level="info" additivity="false">
+        <appender-ref ref="user_module_appender"/>
     </logger>
 ```
 **注意：**如果用了代码方式匹配logger name，日志可能打印出来没有类、方法信息，打印出的是`user_module_logger`，因为很多时候encoder配置的是%logger，而%logger会被logger name替换。如要打印出类、方法信息，%logger应改为%C.%M，%C代表class，%M代表方法，具体的变量可见`ch.qos.logback.classic.PatternLayout`类
