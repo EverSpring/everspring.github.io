@@ -360,7 +360,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    847
+                    886
                 </div>
                 
 
@@ -464,7 +464,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>ServiceBusReq采用的泛型，反序列化ENTITY的对象是不固定的。XmlDemoReqDto 就是ServiceBusReq的泛型对象</strong></p>
-<h1 id="问题阶段一"><a href="#问题阶段一" class="headerlink" title="问题阶段一"></a>问题阶段一</h1><p>controller中reqDto打印的msgObject类型实际上是一个LinkedHashMap，而LinkedHashMap明显不符合序列化后是个java bean的要求<br><img src="https://github.com/EverSpring/picbed/blob/main/jackson-databaind-1.png" alt="在这里插入图片描述"><br><strong>解决方法：</strong><br>添加一个ObjectNode接收，然后把objectNode再转换成msgObject，代码如下：</p>
+<h1 id="问题阶段一"><a href="#问题阶段一" class="headerlink" title="问题阶段一"></a>问题阶段一</h1><p>controller中reqDto打印的msgObject类型实际上是一个LinkedHashMap，而LinkedHashMap明显不符合序列化后是个java bean的要求<br><img src="/jackson%E8%A7%A3%E6%9E%90%E6%9C%89%E6%95%B0%E7%BB%84%E7%9A%84xml_images/bbd1beaa.png"><br><strong>解决方法：</strong><br>添加一个ObjectNode接收，然后把objectNode再转换成msgObject，代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
 <span class="token annotation punctuation">@JacksonXmlRootElement</span><span class="token punctuation">(</span>localName <span class="token operator">=</span> <span class="token string">"TX"</span><span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServiceBusReq</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
@@ -489,8 +489,14 @@
         <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">Req</span><span class="token punctuation">)</span> o<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="问题阶段二"><a href="#问题阶段二" class="headerlink" title="问题阶段二"></a>问题阶段二</h1><p>以上处理反序列化成对象，但有另一个问题，companys只获取到一个第二个节点，也就是NAME-2的值，NAME-1的值没有获取到<br><img src="https://github.com/EverSpring/picbed/blob/main/jackson-databaind-2.png" alt="在这里插入图片描述"></p>
-<h1 id="问题阶段三"><a href="#问题阶段三" class="headerlink" title="问题阶段三"></a>问题阶段三</h1><p>修改XmlDemoReqDto的定义，代码修改后如下：</p>
+<h1 id="问题阶段二"><a href="#问题阶段二" class="headerlink" title="问题阶段二"></a>问题阶段二</h1><p>以上处理反序列化成对象，但有另一个问题，companys只获取到一个第二个节点，也就是NAME-2的值，NAME-1的值没有获取到<br><img src="/jackson%E8%A7%A3%E6%9E%90%E6%9C%89%E6%95%B0%E7%BB%84%E7%9A%84xml_images/66222ed5.png"></p>
+<h1 id="问题阶段三"><a href="#问题阶段三" class="headerlink" title="问题阶段三"></a>问题阶段三</h1><p>只获取到一个节点，有两个地址修改：</p>
+<ol>
+<li><p>修改jackson-databind的版本，需要改为2.12.0版本以上，官方做了处理<br><img src="/jackson%E8%A7%A3%E6%9E%90%E6%9C%89%E6%95%B0%E7%BB%84%E7%9A%84xml_images/f6c58e74.png"></p>
+</li>
+<li><p>修改XmlDemoReqDto的定义，代码修改后如下：</p>
+</li>
+</ol>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
 <span class="token annotation punctuation">@Builder</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XmlDemoReqDto</span> <span class="token punctuation">&#123;</span>
@@ -1022,7 +1028,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2023</span>
+                <span id="year">2019-2025</span>
             
             <a href="/about" target="_blank">EverSpring</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

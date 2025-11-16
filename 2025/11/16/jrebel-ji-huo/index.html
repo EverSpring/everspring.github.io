@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MySQL字符串相加引发的血案, EverSpring Blog">
-    <meta name="description" content="晚上接到同事电话，说有几十张表的数据全被删除了，当时懵逼了。先说背景：环境是MySQL 5.7.16，数据是在运维过程中运行的DELETE语句导致。选择其中一条为例
-delete from fcexam where bussno in (&amp;">
+    <meta name="keywords" content="JRebel 2025.4.1激活, EverSpring Blog">
+    <meta name="description" content="
+
+环境与背景IDEA 2023.3.6，JRebel 2024.2.4，代码工程 springboot 3.4.7通过JRebel启动时出现以下异常，原因就是当前的JRebel版本不支持Tomcat 10，最好是升级JRebel版本，不要">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@ delete from fcexam where bussno in (&amp;">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MySQL字符串相加引发的血案 | EverSpring Blog</title>
+    <title>JRebel 2025.4.1激活 | EverSpring Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -293,7 +294,7 @@ delete from fcexam where bussno in (&amp;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MySQL字符串相加引发的血案</h1>
+                    <h1 class="description center-align post-title">JRebel 2025.4.1激活</h1>
                 </div>
             </div>
         </div>
@@ -315,8 +316,12 @@ delete from fcexam where bussno in (&amp;">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MySQL/">
-                                <span class="chip bg-color">MySQL</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/JRebel/">
+                                <span class="chip bg-color">JRebel</span>
                             </a>
                         
                     </div>
@@ -327,8 +332,8 @@ delete from fcexam where bussno in (&amp;">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                数据库
+                            <a href="/categories/JAVA/" class="post-category">
+                                JAVA
                             </a>
                         
                     </div>
@@ -340,7 +345,7 @@ delete from fcexam where bussno in (&amp;">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-16
+                    2025-11-16
                 </div>
                 
 
@@ -349,14 +354,14 @@ delete from fcexam where bussno in (&amp;">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    584
+                    952
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -379,35 +384,85 @@ delete from fcexam where bussno in (&amp;">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>晚上接到同事电话，说有几十张表的数据全被删除了，当时懵逼了。<br>先说背景：环境是MySQL 5.7.16，数据是在运维过程中运行的DELETE语句导致。选择其中一条为例</p>
-<pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>fcexam的bussno结构为varchar，本意是删除GBD000000016323、GBD000000016325这两条数据，但把,写成了+。delete from改成select查询一次，发现数据全被查出来了，所以delete的所有数据。<br><strong>原因分析</strong><br>这跟MySQL中字符串加减乘除、字符串与0&#x2F;1比较有关。</p>
-<h4 id="1-字符串加减乘除"><a href="#1-字符串加减乘除" class="headerlink" title="1. 字符串加减乘除"></a>1. 字符串加减乘除</h4><blockquote>
-<p>在mysql当中,字符串类型间进行加减乘除运算的时候,会<code>截取字符串以数字开头的那一部分数字进行运算</code>,如果字符串前面没有数字,那么就只能截取的数值为0,那么进行加减的时候结果都是0,进行乘除的时候结果都是NULL<br>感谢链接作者：不姓马的小马哥<br>文章地址：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></p>
-</blockquote>
-<pre class="line-numbers language-none"><code class="language-none">select (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为0
-select (&#39;GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为null
-select (&#39;GBD000000016323&#39;*&#39;GBD000000016325&#39;); --结果为0
+                <br/>
 
-select (&#39;1GBD000000016323&#39;+&#39;GBD000000016325&#39;); --结果为1
-select (&#39;1GBD000000016323&#39;+&#39;2GBD000000016325&#39;); --结果为3
-select (&#39;1GBD000000016323&#39;&#x2F;&#39;GBD000000016325&#39;); --结果为null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="环境与背景"><a href="#环境与背景" class="headerlink" title="环境与背景"></a>环境与背景</h1><p>IDEA 2023.3.6，JRebel 2024.2.4，代码工程 springboot 3.4.7<br>通过JRebel启动时出现以下异常，原因就是当前的JRebel版本不支持Tomcat 10，最好是升级JRebel版本，不要去动代码</p>
+<pre class="line-numbers language-none"><code class="language-none">org.apache.catalina.core.ContainerBase   : A child container failed during start
 
-<h4 id="2-字符串与0、1比较"><a href="#2-字符串与0、1比较" class="headerlink" title="2. 字符串与0、1比较"></a>2. 字符串与0、1比较</h4><p>MySQL boolean类型0代表false，1代表true。字符串开头没有数字时与0、1比较，如果是和0比较，得到的结果是1也就是true，和其他数字比较结果是0也就是false</p>
-<pre class="line-numbers language-none"><code class="language-none">select &#39;GBD000000016323&#39;&#x3D;0; --结果为1
-select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>所以在我们跑的脚本里面，因为bussno都是’GBD’开头，转换出来就是where 0 &#x3D; 0，where条件结果为true就把所以数据都查询出来了。</p>
-<pre class="line-numbers language-none"><code class="language-none">select * from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;); --等于是select * from fcexam where 0 in (0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>假如bussno有3条数据，’GBD000000016323’，’GBD000000016325’，’2GBD000000016325’，用上面的SQL只能查出前面2条，最后一条因为是2开头所以查询不出来</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><pre class="line-numbers language-SQL" data-language="SQL"><code class="language-SQL">delete from fcexam where bussno in (&#39;GBD000000016323&#39;+&#39;GBD000000016325&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这条SQL相当于就是</p>
-<pre class="line-numbers language-none"><code class="language-none">delete from fcexam where 0 in (0)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>参考资料：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ab2c0dc3cb5">https://www.jianshu.com/p/2ab2c0dc3cb5</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true">https://stackoverflow.com/questions/22080382/mysql-why-comparing-a-string-to-0-gives-true</a></li>
-</ol>
+java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to initialize component [StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[]]
+    at java.base&#x2F;java.util.concurrent.FutureTask.report(FutureTask.java:122)
+    at java.base&#x2F;java.util.concurrent.FutureTask.get(FutureTask.java:191)
+    at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:756)
+    at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+    at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+    at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+    at java.base&#x2F;java.util.concurrent.FutureTask.run(FutureTask.java:264)
+    at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+    at java.base&#x2F;java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+    at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+    at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+    at org.apache.catalina.core.StandardService.startInternal(StandardService.java:412)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+    at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+    at org.apache.catalina.startup.Tomcat.start(Tomcat.java:438)
+    at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
+    at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.&lt;init&gt;(TomcatWebServer.java:107)
+    at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:517)
+    at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:219)
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167)
+    at org.springframework.context.support.AbstractApplicationContext.__refresh(AbstractApplicationContext.java:621)
+    at org.springframework.context.support.AbstractApplicationContext.jrLockAndRefresh(AbstractApplicationContext.java:41002)
+    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:42008)
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+    at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+    at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+    at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+    at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+    at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+Caused by: org.apache.catalina.LifecycleException: Failed to initialize component [StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[]]
+    at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:406)
+    at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:125)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:155)
+    at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+    at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+    at java.base&#x2F;java.util.concurrent.FutureTask.run(FutureTask.java:264)
+    at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+    at java.base&#x2F;java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+    at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+    ... 31 common frames omitted
+Caused by: java.lang.NoSuchMethodError: &#39;boolean org.apache.catalina.webresources.TestResourceSet.isPathMounted(java.lang.String, java.lang.String)&#39;
+    at org.apache.catalina.webresources.TestResourceSet.listWebAppPaths(AbstractArchiveResourceSet.java:118)
+    at org.apache.catalina.webresources.TestResourceSet.doTest(AbstractArchiveResourceSet.java:41001)
+    at org.zeroturnaround.javarebel.catalina.JrTestResourceSet$1.run(SourceFile:37)
+    at org.zeroturnaround.javarebel.catalina.JrTestResourceSet$1.run(SourceFile:33)
+    at org.zeroturnaround.javarebel.integration.util.SecurityController.doWithoutSecurityManager(SourceFile:29)
+    at org.zeroturnaround.javarebel.catalina.JrTestResourceSet.checkPatchNeeded(SourceFile:33)
+    at org.apache.catalina.webresources.TestResourceSet.isPatchNeeded(AbstractArchiveResourceSet.java:42001)
+    at org.apache.catalina.webresources.AbstractArchiveResourceSet.&lt;clinit&gt;(AbstractArchiveResourceSet.java)
+    at org.apache.catalina.webresources.StandardRoot.createWebResourceSet(StandardRoot.java:396)
+    at org.apache.catalina.webresources.StandardRoot.createWebResourceSet(StandardRoot.java:360)
+    at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory$StaticResourceConfigurer.addResourceSet(TomcatServletWebServerFactory.java:864)
+    at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory$StaticResourceConfigurer.addResourceJars(TomcatServletWebServerFactory.java:841)
+    at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory$StaticResourceConfigurer.lifecycleEvent(TomcatServletWebServerFactory.java:828)
+    at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:109)
+    at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:389)
+    at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:121)
+    ... 38 common frames omitted<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="JRebel激活"><a href="#JRebel激活" class="headerlink" title="JRebel激活"></a>JRebel激活</h1><p>JRbel升级到了2025.4.1，以前用的是<code>https://jrebel.qekang.com/</code>来激活，这种激活不用下载任何东西，直接配置就可以。现在升级需要先下载一个代理  </p>
+<ul>
+<li>第一步：下载JRebel激活服务器<br>访问GitHub开源项目：<a target="_blank" rel="noopener" href="https://github.com/yu-xiaoyao/jrebel-license-active-server">https://github.com/yu-xiaoyao/jrebel-license-active-server</a><br>根据你的操作系统选择对应版本下载。</li>
+<li>第二步：生成guid，可通过 <a target="_blank" rel="noopener" href="https://www.guidgen.com/">https://www.guidgen.com/</a> 生成</li>
+<li>第三步：运行激活服务器<br>下载完成后，直接双击运行即可。程序启动后会显示代理端口信息（默认端口为12345）<br><img src="/jrebel/img.png" alt="img.png"></li>
+<li>第四步：JRebel中激活，地址为<a target="_blank" rel="noopener" href="http://127.0.0.1:12345/%E7%94%9F%E6%88%90%E7%9A%84guid%EF%BC%8C%E9%82%AE%E7%AE%B1%E9%9A%8F%E4%BE%BF%E5%A1%AB">http://127.0.0.1:12345/生成的guid，邮箱随便填</a><br><img src="/jrebel/img_1.png" alt="img_1.png"></li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>关闭自动激活</li>
+</ul>
+<p>👽个人博客：<a href="https://everspring.github.io/">https://everspring.github.io/</a><br>👽公众号：爱历史的IT男</p>
 
                 
             </div>
@@ -434,7 +489,7 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://everspring.github.io/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/">https://everspring.github.io/2022/02/16/mysql-zi-fu-chuan-xiang-jia-yin-fa-de-xie-an/</a>
+                    <a href="https://everspring.github.io/2025/11/16/jrebel-ji-huo/">https://everspring.github.io/2025/11/16/jrebel-ji-huo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -472,8 +527,12 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/MySQL/">
-                                    <span class="chip bg-color">MySQL</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/JRebel/">
+                                    <span class="chip bg-color">JRebel</span>
                                 </a>
                             
                         </div>
@@ -647,17 +706,18 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/27/arthas-cha-kan-springboot-pei-zhi-ji-ognl-classnotfoundexception-chu-li/">
+                <a href="/2025/11/16/jrebel-ji-huo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Arthas查看SpringBoot配置及ognl ClassNotFoundException处理">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="JRebel 2025.4.1激活">
                         
-                        <span class="card-title">Arthas查看SpringBoot配置及ognl ClassNotFoundException处理</span>
+                        <span class="card-title">JRebel 2025.4.1激活</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -667,9 +727,63 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-27
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-11-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JAVA/" class="post-category">
+                                    JAVA
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/JRebel/">
+                        <span class="chip bg-color">JRebel</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/09/29/guan-yu-mybatis-ri-zhi-shu-chu-de-yi-xie-si-kao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="关于Logback+MyBatis日志输出的一些思考">
+                        
+                        <span class="card-title">关于Logback+MyBatis日志输出的一些思考</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -685,61 +799,8 @@ select &#39;1GBD000000016323&#39;&#x3D;1; --结果为1<span aria-hidden="true" c
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Arthas/">
-                        <span class="chip bg-color">Arthas</span>
-                    </a>
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/02/12/kai-yuan-xie-yi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="了解开源协议">
-                        
-                        <span class="card-title">了解开源协议</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-12
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
-                                    架构
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">规范</span>
+                    <a href="/tags/%E6%97%A5%E5%BF%97/">
+                        <span class="chip bg-color">日志</span>
                     </a>
                     
                 </div>
